@@ -1,0 +1,9 @@
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Domain/bin/Debug/netstandard2.0/RecipeManager.Domain.deps.json
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Domain/bin/Debug/netstandard2.0/RecipeManager.Domain.dll
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Domain/bin/Debug/netstandard2.0/RecipeManager.Domain.pdb
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Domain/obj/Debug/netstandard2.0/RecipeManager.Domain.csprojAssemblyReference.cache
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Domain/obj/Debug/netstandard2.0/RecipeManager.Domain.csproj.CoreCompileInputs.cache
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Domain/obj/Debug/netstandard2.0/RecipeManager.Domain.AssemblyInfoInputs.cache
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Domain/obj/Debug/netstandard2.0/RecipeManager.Domain.AssemblyInfo.cs
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Domain/obj/Debug/netstandard2.0/RecipeManager.Domain.dll
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Domain/obj/Debug/netstandard2.0/RecipeManager.Domain.pdb

@@ -1,0 +1,12 @@
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Core/bin/Debug/netstandard2.0/RecipeManager.Core.deps.json
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Core/bin/Debug/netstandard2.0/RecipeManager.Core.dll
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Core/bin/Debug/netstandard2.0/RecipeManager.Core.pdb
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Core/bin/Debug/netstandard2.0/RecipeManager.Domain.dll
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Core/bin/Debug/netstandard2.0/RecipeManager.Domain.pdb
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Core/obj/Debug/netstandard2.0/RecipeManager.Core.csprojAssemblyReference.cache
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Core/obj/Debug/netstandard2.0/RecipeManager.Core.csproj.CoreCompileInputs.cache
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Core/obj/Debug/netstandard2.0/RecipeManager.Core.AssemblyInfoInputs.cache
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Core/obj/Debug/netstandard2.0/RecipeManager.Core.AssemblyInfo.cs
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Core/obj/Debug/netstandard2.0/RecipeManager.Core.csproj.CopyComplete
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Core/obj/Debug/netstandard2.0/RecipeManager.Core.dll
+/Users/jedsimson/Projects/RecipeManager.Server/RecipeManager.Core/obj/Debug/netstandard2.0/RecipeManager.Core.pdb

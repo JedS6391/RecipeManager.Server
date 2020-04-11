@@ -1,0 +1,55 @@
+﻿<Properties StartupConfiguration="{B2060079-CE88-4A32-AEFD-3818EEFAC36A}|Default">
+  <MonoDevelop.Ide.ItemProperties.RecipeManager.Core FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.RecipeManager.Domain FirstBuild="True" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="RecipeManager.Host/HostDependencyModule.cs">
+    <Files>
+      <File FileName="RecipeManager.Host/Startup.cs" Line="56" Column="65" />
+      <File FileName="RecipeManager.Domain/Class1.cs" Line="11" Column="23" />
+      <File FileName="RecipeManager.Domain/Entities/Recipe.cs" Line="11" Column="18" />
+      <File FileName="RecipeManager.Domain/Entities/Instruction.cs" Line="9" Column="35" />
+      <File FileName="RecipeManager.Core/Features/Recipes/Queries/GetAllQuery.cs" Line="6" Column="63" />
+      <File FileName="RecipeManager.Core/Features/Recipes/Models/RecipeModel.cs" Line="26" Column="38" />
+      <File FileName="RecipeManager.Core/Features/Recipes/Models/IngredientModel.cs" Line="41" Column="2" />
+      <File FileName="RecipeManager.Core/Features/Recipes/Models/InstructionModel.cs" Line="47" Column="2" />
+      <File FileName="RecipeManager.Core/Features/Recipes/Queries/Handlers/GetAllQueryHandler.cs" Line="39" Column="52" />
+      <File FileName="RecipeManager.Core/Infrastructure/CoreDependencyModule.cs" Line="7" Column="19" />
+      <File FileName="RecipeManager.Core/Infrastructure/ContainerBuilderExtensions.cs" Line="21" Column="40" />
+      <File FileName="RecipeManager.WebApi/Controllers/RecipeController.cs" Line="9" Column="26" />
+      <File FileName="RecipeManager.WebApi/Infrastucture/WebApiDependencyModule.cs" Line="28" Column="10" />
+      <File FileName="RecipeManager.Host/Program.cs" Line="1" Column="1" />
+      <File FileName="RecipeManager.Host/HostDependencyModule.cs" Line="3" Column="47" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="RecipeManager.Server" expanded="True">
+            <Node name="RecipeManager.Core" expanded="True">
+              <Node name="Features" expanded="True">
+                <Node name="Recipes" expanded="True" />
+              </Node>
+              <Node name="Infrastructure" expanded="True" />
+            </Node>
+            <Node name="RecipeManager.Domain" expanded="True">
+              <Node name="Entities" expanded="True" />
+            </Node>
+            <Node name="RecipeManager.Host" expanded="True">
+              <Node name="HostDependencyModule.cs" selected="True" />
+            </Node>
+            <Node name="RecipeManager.WebApi" expanded="True">
+              <Node name="Dependencies" expanded="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Infrastucture" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.RecipeManager.Host PreferredExecutionTarget="/Applications/Firefox.app" />
+</Properties>

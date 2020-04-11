@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
+    <Compile Remove="Infrastructure\ContainerBuilderExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\" />
+    <Folder Include="Features\Recipes\" />
+    <Folder Include="Features\Recipes\Queries\" />
+    <Folder Include="Features\Recipes\Models\" />
+    <Folder Include="Features\Recipes\Queries\Requests\" />
+    <Folder Include="Features\Recipes\Queries\Handlers\" />
+    <Folder Include="Infrastructure\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="8.0.1" />
+    <PackageReference Include="Autofac" Version="5.1.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RecipeManager.Domain\RecipeManager.Domain.csproj" />
+  </ItemGroup>
+</Project>
