@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RecipeManager.Core.Features.Recipes.Models;
 using RecipeManager.Core.Features.Recipes.Queries.Requests;
@@ -9,7 +8,6 @@ using RecipeManager.Core.Features.Recipes.Queries.Requests;
 namespace RecipeManager.WebApi.Controllers
 {
     [ApiController]
-    [Authorize]
     [Route("api/recipes")]
     public class RecipesController : ControllerBase
     {
