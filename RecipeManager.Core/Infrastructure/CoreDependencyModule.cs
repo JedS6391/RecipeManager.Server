@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using RecipeManager.Core.Data;
+using RecipeManager.Core.Data.Abstract;
 
 namespace RecipeManager.Core.Infrastructure
 {
@@ -11,8 +13,14 @@ namespace RecipeManager.Core.Infrastructure
         {
             base.Load(builder);
 
-            // Register all request handlers
-            builder.RegisterAssemblyTypes(typeof(CoreDependencyModule).Assembly).AsImplementedInterfaces();
+            builder
+                .RegisterType<RecipeDomainContext>()
+                .As<IRecipeDomainContext>();
+
+            // Register all request handlers in this assembly. 
+            builder
+                .RegisterAssemblyTypes(typeof(CoreDependencyModule).Assembly)
+                .AsImplementedInterfaces();
         }
     }
 }

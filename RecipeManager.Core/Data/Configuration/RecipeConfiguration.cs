@@ -1,10 +1,35 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using RecipeManager.Domain.Entities;
+
 namespace RecipeManager.Core.Data.Configuration
 {
-    public class RecipeConfiguration
+    /// <inheritdoc/>
+    public class RecipeConfiguration : IEntityTypeConfiguration<Recipe>
     {
-        public RecipeConfiguration()
+        public void Configure(EntityTypeBuilder<Recipe> builder)
         {
+            builder.ToTable("tblRecipe");
+
+            builder.HasKey(r => r.Id);
+
+            builder
+                .Property(r => r.Id)
+                .HasColumnName("recipe_id");
+
+            builder
+                .Property(r => r.Name)
+                .HasColumnName("recipe_name");
+
+            builder
+                .HasMany(r => r.Ingredients)
+                .WithOne(i => i.Recipe)
+                .HasForeignKey(i => i.RecipeId);
+
+            builder
+                .HasMany(r => r.Instructions)
+                .WithOne(i => i.Recipe)
+                .HasForeignKey(i => i.RecipeId);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace RecipeManager.Core.Infrastructure.Abstract
+﻿namespace RecipeManager.Core.Data.Abstract
 {
     /// <summary>
     /// Defines a provider for database connection strings.
@@ -6,9 +6,8 @@
     public interface IConnectionStringProvider
     {
         /// <summary>
-        /// Gets a database connection string.
+        /// Gets the database connection string.
         /// </summary>
-        /// <returns></returns>
-        string GetConnectionString();
+        string ConnectionString { get; }
     }
 }

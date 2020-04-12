@@ -1,10 +1,47 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using RecipeManager.Core.Data.Abstract;
+using RecipeManager.Domain.Entities;
+
 namespace RecipeManager.Core.Data
 {
-    public class RecipeDomainContext
+    /// <summary>
+    /// An implementation of <see cref="IRecipeDomainContext"/> which utilises a SQL server database.
+    /// </summary>
+    public class RecipeDomainContext : DbContext, IRecipeDomainContext
     {
-        public RecipeDomainContext()
+        private readonly IConnectionStringProvider _connectionStringProvider;
+
+        public RecipeDomainContext(IConnectionStringProvider connectionStringProvider)
         {
+            _connectionStringProvider = connectionStringProvider;
+        }
+
+        /// <inheritdoc/>
+        public DbSet<Recipe> Recipes { get; set; }
+
+        /// <inheritdoc/>
+        public DbSet<Ingredient> Ingredients { get; set; }
+
+        /// <inheritdoc/>
+        public DbSet<Instruction> Instructions { get; set; }
+
+        /// <inheritdoc/>
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (optionsBuilder == null || optionsBuilder.IsConfigured)
+            {
+                return;
+            }
+
+            optionsBuilder.UseSqlServer(_connectionStringProvider.ConnectionString);
+        }
+
+        /// <inheritdoc/>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(RecipeDomainContext).Assembly);
         }
     }
 }

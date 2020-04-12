@@ -41,8 +41,8 @@ namespace RecipeManager.Core.Features.Recipes.Models
             {
                 Id = recipe.Id,
                 Name = recipe.Name,
-                Ingredients = recipe.Ingredients.Select(IngredientModel.From).ToList(),
-                Instructions = recipe.Instructions.Select(InstructionModel.From).ToList()
+                Ingredients = recipe.Ingredients?.Select(IngredientModel.From).ToList(),
+                Instructions = recipe.Instructions?.Select(InstructionModel.From).ToList()
             };
         }
     }

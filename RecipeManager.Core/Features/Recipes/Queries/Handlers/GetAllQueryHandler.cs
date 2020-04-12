@@ -3,9 +3,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using RecipeManager.Core.Data.Abstract;
 using RecipeManager.Core.Features.Recipes.Models;
 using RecipeManager.Core.Features.Recipes.Queries.Requests;
-using RecipeManager.Domain.Entities;
 
 namespace RecipeManager.Core.Features.Recipes.Queries.Handlers
 {
@@ -14,29 +15,26 @@ namespace RecipeManager.Core.Features.Recipes.Queries.Handlers
     /// </summary>
     public class GetAllQueryHandler : IRequestHandler<GetAllQuery, IEnumerable<RecipeModel>>
     {
-        private readonly Recipe[] _recipes;
+        private readonly IRecipeDomainContext _recipeDomainContext;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAllQueryHandler"/> class.
         /// </summary>
-        public GetAllQueryHandler()
+        public GetAllQueryHandler(IRecipeDomainContext recipeDomainContext)
         {
-            _recipes = new Recipe[]
-            {
-                new Recipe()
-                {
-                    Id = System.Guid.NewGuid(),
-                    Name = "Test Recipe",
-                    Ingredients = new Ingredient[] {},
-                    Instructions = new Instruction[] { }
-                }
-            };
+            _recipeDomainContext = recipeDomainContext;
         }
 
         /// <inheritdoc/>
         public async Task<IEnumerable<RecipeModel>> Handle(GetAllQuery request, CancellationToken cancellationToken)
         {
-            return _recipes.Select(RecipeModel.From);
+            var recipes = await _recipeDomainContext
+                .Recipes
+                .Include(r => r.Ingredients)
+                .Include(r => r.Instructions)
+                .ToListAsync();
+
+            return recipes.Select(RecipeModel.From);
         }
     }
 }
