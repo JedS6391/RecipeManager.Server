@@ -13,7 +13,7 @@ namespace RecipeManager.Domain.Entities
         /// <summary>
         /// Gets or sets the identifier.
         /// </summary>
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; }
 
         /// <summary>
         /// Gets or sets the name.

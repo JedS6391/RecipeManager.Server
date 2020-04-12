@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using RecipeManager.Core.Data.Abstract;
 using RecipeManager.Domain.Entities;
 
@@ -42,6 +43,11 @@ namespace RecipeManager.Core.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(RecipeDomainContext).Assembly);
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await base.SaveChangesAsync();
         }
     }
 }

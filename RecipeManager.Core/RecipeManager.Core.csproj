@@ -19,6 +19,12 @@
     <Folder Include="Data\" />
     <Folder Include="Data\Abstract\" />
     <Folder Include="Data\Configuration\" />
+    <Folder Include="Configuration\" />
+    <Folder Include="Features\Recipes\Commands\" />
+    <Folder Include="Features\Recipes\Commands\Requests\" />
+    <Folder Include="Features\Recipes\Commands\Handlers\" />
+    <Folder Include="Features\Recipes\Exceptions\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR" Version="8.0.1" />

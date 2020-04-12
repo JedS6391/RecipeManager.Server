@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using RecipeManager.Domain.Entities;
 
 namespace RecipeManager.Core.Data.Abstract
@@ -22,5 +23,7 @@ namespace RecipeManager.Core.Data.Abstract
         /// Gets or sets the <see cref="Instruction"/> entities.
         /// </summary>
         DbSet<Instruction> Instructions { get; set; }
+
+        Task<int> SaveChangesAsync();
     }
 }

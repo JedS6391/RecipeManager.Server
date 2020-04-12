@@ -9,6 +9,6 @@
         /// <summary>
         /// Gets or sets the identifier.
         /// </summary>
-        TId Id { get; set; }
+        TId Id { get; }
     }
 }

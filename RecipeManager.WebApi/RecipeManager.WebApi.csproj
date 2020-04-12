@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Folder Include="Infrastucture\" />
+    <Folder Include="Security\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RecipeManager.Core\RecipeManager.Core.csproj" />
