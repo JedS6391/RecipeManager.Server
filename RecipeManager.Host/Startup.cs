@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace RecipeManager.Host
 {
@@ -28,6 +30,16 @@ namespace RecipeManager.Host
             var builder = services.AddControllers();
             
             builder.PartManager.ApplicationParts.Add(new AssemblyPart(webApiAssembly));
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = Configuration.GetValue<string>("Authentication:Authority");
+                options.Audience = Configuration.GetValue<string>("Authentication:Audience");
+            });
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -41,6 +53,8 @@ namespace RecipeManager.Host
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseAuthentication();
 
             app.UseHttpsRedirection();
 
