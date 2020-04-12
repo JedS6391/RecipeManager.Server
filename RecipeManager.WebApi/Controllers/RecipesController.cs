@@ -33,7 +33,7 @@ namespace RecipeManager.WebApi.Controllers
         [ProducesResponseType(typeof(IEnumerable<RecipeModel>), StatusCodes.Status200OK)]
         public async Task<RecipeModel> GetById(Guid recipeId)
         {
-            return await _mediator.Send(new GetByIdQuery()
+            return await _mediator.Send(new GetRecipeByIdQuery()
             {
                 Id = recipeId
             });
@@ -47,7 +47,7 @@ namespace RecipeManager.WebApi.Controllers
         [ProducesResponseType(typeof(IEnumerable<RecipeModel>), StatusCodes.Status200OK)]
         public async Task<IEnumerable<RecipeModel>> GetAll()
         {
-            return await _mediator.Send(new GetAllQuery());
+            return await _mediator.Send(new GetAllRecipesQuery());
         }
 
         [HttpPost]

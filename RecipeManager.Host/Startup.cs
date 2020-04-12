@@ -8,6 +8,7 @@ using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using RecipeManager.WebApi.Infrastucture.ExceptionHandling;
 
 namespace RecipeManager.Host
 {
@@ -26,7 +27,11 @@ namespace RecipeManager.Host
         {
             var webApiAssembly = Assembly.Load("RecipeManager.WebApi");
 
-            var builder = services.AddControllers();
+            var builder = services.AddControllers(options =>
+            {
+                options.Filters.Add(new ValidationExceptionFilter());
+                options.Filters.Add(new NotFoundExceptionFilter());
+            });
             
             builder.PartManager.ApplicationParts.Add(new AssemblyPart(webApiAssembly));
 

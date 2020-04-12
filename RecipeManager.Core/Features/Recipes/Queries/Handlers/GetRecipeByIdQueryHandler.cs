@@ -4,24 +4,25 @@ using Microsoft.EntityFrameworkCore;
 using RecipeManager.Core.Data.Abstract;
 using RecipeManager.Core.Features.Recipes.Exceptions;
 using RecipeManager.Core.Features.Recipes.Models;
+using RecipeManager.Core.Features.Recipes.Queries.Handlers.Abstract;
 using RecipeManager.Core.Features.Recipes.Queries.Requests;
 
 namespace RecipeManager.Core.Features.Recipes.Queries.Handlers
 {
     /// <summary>
-    /// Handles <see cref="GetAllQuery"/> requests.
+    /// Handles <see cref="GetRecipeByIdQuery"/> requests.
     /// </summary>
-    public class GetByIdHandler : BaseQueryHandler<GetByIdQuery, RecipeModel>
+    public class GetRecipeByIdQueryHandler : BaseQueryHandler<GetRecipeByIdQuery, RecipeModel>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetByIdHandler"/> class.
+        /// Initializes a new instance of the <see cref="GetRecipeByIdQueryHandler"/> class.
         /// </summary>
-        public GetByIdHandler(IRecipeDomainContext recipeDomainContext)
+        public GetRecipeByIdQueryHandler(IRecipeDomainContext recipeDomainContext)
             : base(recipeDomainContext)
         {}
 
         /// <inheritdoc/>
-        public override async Task<RecipeModel> Handle(GetByIdQuery request, CancellationToken cancellationToken)
+        public override async Task<RecipeModel> Handle(GetRecipeByIdQuery request, CancellationToken cancellationToken)
         {
             var recipe = await RecipeDomainContext
                 .Recipes

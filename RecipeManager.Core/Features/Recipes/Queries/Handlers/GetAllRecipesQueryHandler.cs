@@ -2,28 +2,28 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using RecipeManager.Core.Data.Abstract;
 using RecipeManager.Core.Features.Recipes.Models;
+using RecipeManager.Core.Features.Recipes.Queries.Handlers.Abstract;
 using RecipeManager.Core.Features.Recipes.Queries.Requests;
 
 namespace RecipeManager.Core.Features.Recipes.Queries.Handlers
 {
     /// <summary>
-    /// Handles <see cref="GetAllQuery"/> requests.
+    /// Handles <see cref="GetAllRecipesQuery"/> requests.
     /// </summary>
-    public class GetAllQueryHandler : BaseQueryHandler<GetAllQuery, IEnumerable<RecipeModel>>
+    public class GetAllRecipesQueryHandler : BaseQueryHandler<GetAllRecipesQuery, IEnumerable<RecipeModel>>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetAllQueryHandler"/> class.
+        /// Initializes a new instance of the <see cref="GetAllRecipesQueryHandler"/> class.
         /// </summary>
-        public GetAllQueryHandler(IRecipeDomainContext recipeDomainContext)
+        public GetAllRecipesQueryHandler(IRecipeDomainContext recipeDomainContext)
             : base(recipeDomainContext)
         {}
 
         /// <inheritdoc/>
-        public override async Task<IEnumerable<RecipeModel>> Handle(GetAllQuery request, CancellationToken cancellationToken)
+        public override async Task<IEnumerable<RecipeModel>> Handle(GetAllRecipesQuery request, CancellationToken cancellationToken)
         {
             var recipes = await RecipeDomainContext
                 .Recipes

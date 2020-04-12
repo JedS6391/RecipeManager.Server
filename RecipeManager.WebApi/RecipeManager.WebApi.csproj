@@ -14,6 +14,7 @@
   <ItemGroup>
     <Folder Include="Infrastucture\" />
     <Folder Include="Security\" />
+    <Folder Include="Infrastucture\ExceptionHandling\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RecipeManager.Core\RecipeManager.Core.csproj" />

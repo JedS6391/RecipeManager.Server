@@ -25,6 +25,10 @@
     <Folder Include="Features\Recipes\Commands\Handlers\" />
     <Folder Include="Features\Recipes\Exceptions\" />
     <Folder Include="Exceptions\" />
+    <Folder Include="Features\Recipes\Commands\Validation\" />
+    <Folder Include="Features\Recipes\Commands\Validation\Abstract\" />
+    <Folder Include="Features\Recipes\Queries\Handlers\Abstract\" />
+    <Folder Include="Features\Recipes\Commands\Handlers\Abstract\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR" Version="8.0.1" />

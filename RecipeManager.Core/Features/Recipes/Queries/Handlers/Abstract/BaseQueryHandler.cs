@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using RecipeManager.Core.Data.Abstract;
 
-namespace RecipeManager.Core.Features.Recipes.Queries.Handlers
+namespace RecipeManager.Core.Features.Recipes.Queries.Handlers.Abstract
 {
     /// <summary>
     /// Defines base function for all query request handlers.
@@ -17,7 +17,7 @@ namespace RecipeManager.Core.Features.Recipes.Queries.Handlers
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseQueryHandler{TRequest, TResponse}"/> class.
         /// </summary>
-        public BaseQueryHandler(IRecipeDomainContext recipeDomainContext)
+        protected BaseQueryHandler(IRecipeDomainContext recipeDomainContext)
         {
             RecipeDomainContext = recipeDomainContext;
         }
