@@ -44,6 +44,8 @@ namespace RecipeManager.Host
                 options.Authority = Configuration.GetValue<string>("Authentication:Authority");
                 options.Audience = Configuration.GetValue<string>("Authentication:Audience");
             });
+
+            services.AddCors();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -65,6 +67,12 @@ namespace RecipeManager.Host
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(builder =>
+                builder
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {

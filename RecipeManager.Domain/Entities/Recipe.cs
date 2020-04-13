@@ -29,5 +29,10 @@ namespace RecipeManager.Domain.Entities
         /// Gets or sets the instructions.
         /// </summary>
         public ICollection<Instruction> Instructions { get; set; }
+
+        /// <summary>
+        /// Gets or sets the identifier of the user this recipe belongs to.
+        /// </summary>
+        public string UserId { get; set; }
     }
 }

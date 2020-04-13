@@ -22,6 +22,10 @@ namespace RecipeManager.Core.Data.Configuration
                 .HasColumnName("recipe_name");
 
             builder
+                .Property(r => r.UserId)
+                .HasColumnName("recipe_userId");
+
+            builder
                 .HasMany(r => r.Ingredients)
                 .WithOne(i => i.Recipe)
                 .HasForeignKey(i => i.RecipeId);

@@ -23,12 +23,12 @@ namespace RecipeManager.Core.Features.Recipes.Commands.Handlers
 
         public override async Task<RecipeModel> DoHandleRequest(CreateRecipeRequest request, CancellationToken cancellationToken)
         {
-            // TODO: Validation
             var recipe = new Recipe()
             {
                 Name = request.Name,
                 Ingredients = new Ingredient[] { },
-                Instructions = new Instruction[] { }
+                Instructions = new Instruction[] { },
+                UserId = request.User.Id
             };
 
             RecipeDomainContext.Recipes.Add(recipe);

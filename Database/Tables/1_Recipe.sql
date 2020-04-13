@@ -1,9 +1,9 @@
 USE RecipeManager;
 
-IF (NOT EXISTS (SELECT 1 
-                FROM INFORMATION_SCHEMA.TABLES 
-                WHERE TABLE_SCHEMA = 'dbo' 
-                AND  TABLE_NAME = 'tblRecipe'))
+IF NOT EXISTS (SELECT 1 
+               FROM INFORMATION_SCHEMA.TABLES 
+               WHERE TABLE_SCHEMA = 'dbo' 
+               AND  TABLE_NAME = 'tblRecipe')
 BEGIN
     CREATE TABLE dbo.tblRecipe
     (

@@ -1,7 +1,9 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using RecipeManager.Core.Infrastructure;
+using RecipeManager.WebApi.Security;
 
 namespace RecipeManager.WebApi.Infrastucture
 {
@@ -25,6 +27,14 @@ namespace RecipeManager.WebApi.Infrastucture
                 var c = context.Resolve<IComponentContext>();
                 return t => c.Resolve(t);
             });
+
+            builder
+                .RegisterType<HttpContextAccessor>()
+                .As<IHttpContextAccessor>();
+
+            builder
+                .RegisterType<HttpContextIdentityProvider>()
+                .As<IIdentityProvider>();
         }
     }
 }
