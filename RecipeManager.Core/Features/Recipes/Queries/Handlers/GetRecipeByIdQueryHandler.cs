@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using RecipeManager.Core.Data.Abstract;
 using RecipeManager.Core.Features.Recipes.Exceptions;
-using RecipeManager.Core.Features.Recipes.Models;
+using RecipeManager.Core.Features.Recipes.Models.Query;
 using RecipeManager.Core.Features.Recipes.Queries.Handlers.Abstract;
 using RecipeManager.Core.Features.Recipes.Queries.Requests;
 
@@ -28,7 +28,7 @@ namespace RecipeManager.Core.Features.Recipes.Queries.Handlers
                 .Recipes
                 .Include(r => r.Ingredients)
                 .Include(r => r.Instructions)
-                .FirstOrDefaultAsync(r => r.Id == request.Id);
+                .FirstOrDefaultAsync(r => r.UserId == request.User.Id && r.Id == request.Id);
 
             return recipe == null ?
                 throw new RecipeNotFoundException($"No recipe found [ID = {request.Id}]") :

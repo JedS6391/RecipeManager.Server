@@ -2,10 +2,13 @@
 using RecipeManager.Core.Exceptions;
 using RecipeManager.Core.Features.Recipes.Commands.Requests;
 using RecipeManager.Core.Features.Recipes.Commands.Validation.Abstract;
-using RecipeManager.Core.Features.Recipes.Models;
+using RecipeManager.Core.Features.Recipes.Models.Query;
 
 namespace RecipeManager.Core.Features.Recipes.Commands.Validation
 {
+    /// <summary>
+    /// A command request validator for <see cref="CreateRecipeRequest"/> requests.
+    /// </summary>
     public class CreateRecipeCommandRequestValidator
         : ICommandRequestValidator<CreateRecipeRequest, RecipeModel>
     {

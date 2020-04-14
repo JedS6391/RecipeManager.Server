@@ -29,6 +29,8 @@
     <Folder Include="Features\Recipes\Commands\Validation\Abstract\" />
     <Folder Include="Features\Recipes\Queries\Handlers\Abstract\" />
     <Folder Include="Features\Recipes\Commands\Handlers\Abstract\" />
+    <Folder Include="Features\Recipes\Models\Command\" />
+    <Folder Include="Features\Recipes\Models\Query\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR" Version="8.0.1" />

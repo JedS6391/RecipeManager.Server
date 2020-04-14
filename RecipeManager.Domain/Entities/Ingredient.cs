@@ -24,6 +24,11 @@ namespace RecipeManager.Domain.Entities
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the amount of this ingredient.
+        /// </summary>
+        public string Amount { get; set; }
+
+        /// <summary>
         /// Gets or sets the recipe that this ingredient is for.
         /// </summary>
         public Recipe Recipe { get; set; }

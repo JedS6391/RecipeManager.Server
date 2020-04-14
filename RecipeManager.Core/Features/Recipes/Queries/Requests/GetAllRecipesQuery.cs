@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using MediatR;
-using RecipeManager.Core.Features.Recipes.Models;
+using RecipeManager.Core.Features.Recipes.Models.Query;
 using RecipeManager.Domain.Entities;
 
 namespace RecipeManager.Core.Features.Recipes.Queries.Requests

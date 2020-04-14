@@ -7,6 +7,11 @@ using RecipeManager.Core.Features.Recipes.Commands.Validation.Abstract;
 
 namespace RecipeManager.Core.Features.Recipes.Commands.Handlers.Abstract
 {
+    /// <summary>
+    /// Defines a base set of functionality for command request handlers with validation.
+    /// </summary>
+    /// <typeparam name="TRequest"></typeparam>
+    /// <typeparam name="TResponse"></typeparam>
     public abstract class BaseValidatingCommandHandler<TRequest, TResponse>
         : BaseCommandHandler<TRequest, TResponse>
           where TRequest : IRequest<TResponse>

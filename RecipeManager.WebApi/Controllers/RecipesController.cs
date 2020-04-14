@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RecipeManager.Core.Features.Recipes.Commands.Requests;
-using RecipeManager.Core.Features.Recipes.Models;
+using RecipeManager.Core.Features.Recipes.Models.Query;
+using RecipeManager.Core.Features.Recipes.Models.Command;
 using RecipeManager.Core.Features.Recipes.Queries.Requests;
 using RecipeManager.WebApi.Security;
 
@@ -66,11 +67,50 @@ namespace RecipeManager.WebApi.Controllers
         [HttpPost]
         [AuthorizationScope(AuthorizationScopes.Recipes.Write)]
         [ProducesResponseType(typeof(RecipeModel), StatusCodes.Status200OK)]
-        public async Task<RecipeModel> Post([FromBody] RecipeCreateModel request)
+        public async Task<RecipeModel> CreateNew([FromBody] RecipeCreateModel request)
         {
             return await _mediator.Send(new CreateRecipeRequest()
             {
                 Name = request.Name,
+                User = _identityProvider.Current
+            });
+        }
+
+        /// <summary>
+        /// Updates a recipe for the current user.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("{recipeId}")]
+        [AuthorizationScope(AuthorizationScopes.Recipes.Write)]
+        [ProducesResponseType(typeof(RecipeModel), StatusCodes.Status200OK)]
+        public async Task<RecipeModel> CreateNew(Guid recipeId, [FromBody] RecipeUpdateModel request)
+        {
+            return await _mediator.Send(new UpdateRecipeRequest()
+            {
+                RecipeId = recipeId,
+                Name = request.Name,
+                User = _identityProvider.Current
+            });
+        }
+
+
+        /// <summary>
+        /// Updates the instructions of the given recipe for the current user.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("{recipeId}/ingredients")]
+        [AuthorizationScope(AuthorizationScopes.Recipes.Write)]
+        [ProducesResponseType(typeof(RecipeModel), StatusCodes.Status200OK)]
+        public async Task<RecipeModel> UpdateInstructions(Guid recipeId, [FromBody] IEnumerable<IngredientCreateModel> request)
+        {
+            return await _mediator.Send(new UpdateRecipeIngredientsRequest()
+            {
+                RecipeId = recipeId,
+                Ingredients = request,
                 User = _identityProvider.Current
             });
         }

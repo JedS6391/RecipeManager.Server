@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RecipeManager.Domain.Entities;
 
-namespace RecipeManager.Core.Features.Recipes.Models
+namespace RecipeManager.Core.Features.Recipes.Models.Query
 {
     /// <summary>
     /// Defines a read-only view of a <see cref="Recipe"/>.

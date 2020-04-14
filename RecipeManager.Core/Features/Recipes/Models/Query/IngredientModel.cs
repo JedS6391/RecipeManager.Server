@@ -1,7 +1,7 @@
 ﻿using System;
 using RecipeManager.Domain.Entities;
 
-namespace RecipeManager.Core.Features.Recipes.Models
+namespace RecipeManager.Core.Features.Recipes.Models.Query
 {
     /// <summary>
     /// Defines a read-only view of an <see cref="Ingredient"/>.
@@ -24,6 +24,11 @@ namespace RecipeManager.Core.Features.Recipes.Models
         public string Name { get; private set; }
 
         /// <summary>
+        /// Gets the amount.
+        /// </summary>
+        public string Amount { get; private set; }
+
+        /// <summary>
         /// Creates an <see cref="IngredientModel"/> instance from the given <see cref="Ingredient"/>.
         /// </summary>
         /// <param name="ingredient">An ingredient.</param>
@@ -34,7 +39,8 @@ namespace RecipeManager.Core.Features.Recipes.Models
             {
                 Id = ingredient.Id,
                 RecipeId = ingredient.RecipeId,
-                Name = ingredient.Name
+                Name = ingredient.Name,
+                Amount = ingredient .Amount
             };
         }
     }

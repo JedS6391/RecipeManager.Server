@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using RecipeManager.Core.Features.Recipes.Models;
+using RecipeManager.Core.Features.Recipes.Models.Query;
 using RecipeManager.Domain.Entities;
 
 namespace RecipeManager.Core.Features.Recipes.Commands.Requests
@@ -7,7 +7,6 @@ namespace RecipeManager.Core.Features.Recipes.Commands.Requests
     /// <summary>
     /// Represents a command request to create a new <see cref="Recipe"/> for a given user.
     /// </summary>
-    /// <remarks>
     public class CreateRecipeRequest : IRequest<RecipeModel>
     {
         /// <summary>

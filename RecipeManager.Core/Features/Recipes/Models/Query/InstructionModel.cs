@@ -1,7 +1,7 @@
 ﻿using System;
 using RecipeManager.Domain.Entities;
 
-namespace RecipeManager.Core.Features.Recipes.Models
+namespace RecipeManager.Core.Features.Recipes.Models.Query
 {
     /// <summary>
     /// Defines a read-only view of an <see cref="Instruction"/>.
