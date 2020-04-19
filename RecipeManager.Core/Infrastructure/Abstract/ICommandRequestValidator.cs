@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
 
-namespace RecipeManager.Core.Features.Recipes.Commands.Validation.Abstract
+namespace RecipeManager.Core.Infrastructure.Abstract
 {
     /// <summary>
     /// Defines a validator for a command request.

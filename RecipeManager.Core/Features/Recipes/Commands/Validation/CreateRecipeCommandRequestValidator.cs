@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using RecipeManager.Core.Exceptions;
 using RecipeManager.Core.Features.Recipes.Commands.Requests;
-using RecipeManager.Core.Features.Recipes.Commands.Validation.Abstract;
 using RecipeManager.Core.Features.Recipes.Models.Query;
+using RecipeManager.Core.Infrastructure.Abstract;
 
 namespace RecipeManager.Core.Features.Recipes.Commands.Validation
 {
@@ -16,16 +16,13 @@ namespace RecipeManager.Core.Features.Recipes.Commands.Validation
         {
             if (string.IsNullOrEmpty(request.Name) || string.IsNullOrWhiteSpace(request.Name))
             {
-                ThrowValidationError(new string[]
-                {
-                    ValidationErrors.NameMustBeANonEmptyString
-                });
+                ThrowValidationError(ValidationErrors.NameMustBeANonEmptyString);
             }
 
             return Task.CompletedTask;
         }
 
-        private void ThrowValidationError(string[] validationErrors)
+        private void ThrowValidationError(params string[] validationErrors)
         {
             throw new ValidationException("Unable to create recipe due to failed validations.", validationErrors);
         }

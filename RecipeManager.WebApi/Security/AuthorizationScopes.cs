@@ -20,5 +20,21 @@
             /// </summary>
             public const string Write = "write:recipes";
         }
+
+        /// <summary>
+        /// Defines the authorization scopes for the cart resources.
+        /// </summary>
+        public static class Cart
+        {
+            /// <summary>
+            /// The read scope.
+            /// </summary>
+            public const string Read = "read:cart";
+
+            /// <summary>
+            /// The write scope.
+            /// </summary>
+            public const string Write = "write:cart";
+        }
     }
 }

@@ -23,7 +23,21 @@ namespace RecipeManager.Core.Data.Abstract
         /// Gets or sets the <see cref="Instruction"/> entities.
         /// </summary>
         DbSet<Instruction> Instructions { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the <see cref="Cart"/> entities.
+        /// </summary>
+        DbSet<Cart> Carts { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the <see cref="CartItems"/> entities.
+        /// </summary>
+        DbSet<CartItem> CartItems { get; set; }
 
+        /// <summary>
+        /// Saves all changes made in this context.
+        /// </summary>
+        /// <returns></returns>
         Task<int> SaveChangesAsync();
     }
 }

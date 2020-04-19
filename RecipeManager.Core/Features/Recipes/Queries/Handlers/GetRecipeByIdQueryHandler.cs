@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using RecipeManager.Core.Data.Abstract;
 using RecipeManager.Core.Features.Recipes.Exceptions;
 using RecipeManager.Core.Features.Recipes.Models.Query;
-using RecipeManager.Core.Features.Recipes.Queries.Handlers.Abstract;
 using RecipeManager.Core.Features.Recipes.Queries.Requests;
+using RecipeManager.Core.Infrastructure.Abstract;
 
 namespace RecipeManager.Core.Features.Recipes.Queries.Handlers
 {

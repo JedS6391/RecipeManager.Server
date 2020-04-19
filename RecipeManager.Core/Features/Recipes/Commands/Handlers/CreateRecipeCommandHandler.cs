@@ -2,10 +2,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using RecipeManager.Core.Data.Abstract;
-using RecipeManager.Core.Features.Recipes.Commands.Handlers.Abstract;
 using RecipeManager.Core.Features.Recipes.Commands.Requests;
-using RecipeManager.Core.Features.Recipes.Commands.Validation.Abstract;
 using RecipeManager.Core.Features.Recipes.Models.Query;
+using RecipeManager.Core.Infrastructure.Abstract;
 using RecipeManager.Domain.Entities;
 
 namespace RecipeManager.Core.Features.Recipes.Commands.Handlers
@@ -31,7 +30,7 @@ namespace RecipeManager.Core.Features.Recipes.Commands.Handlers
                 UserId = request.User.Id
             };
 
-            RecipeDomainContext.Recipes.Add(recipe);
+            await RecipeDomainContext.Recipes.AddAsync(recipe, cancellationToken);
 
             await RecipeDomainContext.SaveChangesAsync();
 

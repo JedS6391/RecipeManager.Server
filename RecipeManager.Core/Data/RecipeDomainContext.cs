@@ -25,6 +25,12 @@ namespace RecipeManager.Core.Data
 
         /// <inheritdoc/>
         public DbSet<Instruction> Instructions { get; set; }
+        
+        /// <inheritdoc/>
+        public DbSet<Cart> Carts { get; set; }
+        
+        /// <inheritdoc/>
+        public DbSet<CartItem> CartItems { get; set; }
 
         /// <inheritdoc/>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -45,6 +51,7 @@ namespace RecipeManager.Core.Data
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(RecipeDomainContext).Assembly);
         }
 
+        /// <inheritdoc/>
         public async Task<int> SaveChangesAsync()
         {
             return await base.SaveChangesAsync();

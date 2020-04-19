@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using RecipeManager.Core.Data.Abstract;
 
-namespace RecipeManager.Core.Features.Recipes.Queries.Handlers.Abstract
+namespace RecipeManager.Core.Infrastructure.Abstract
 {
     /// <summary>
     /// Defines base function for all query request handlers.

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using RecipeManager.Core.Data.Abstract;
 
-namespace RecipeManager.Core.Features.Recipes.Commands.Handlers.Abstract
+namespace RecipeManager.Core.Infrastructure.Abstract
 {
     /// <summary>
     /// Defines a base set of functionality for command request handlers.
