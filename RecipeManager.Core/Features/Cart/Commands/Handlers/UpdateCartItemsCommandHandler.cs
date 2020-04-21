@@ -14,18 +14,18 @@ using RecipeManager.Domain.Entities;
 namespace RecipeManager.Core.Features.Cart.Commands.Handlers
 {
     /// <summary>
-    /// Handles all <see cref="AddIngredientsToCurrentCartRequest"/> requests.
+    /// Handles all <see cref="UpdateCartItemsRequest"/> requests.
     /// </summary>
-    public class AddIngredientsToCurrentCartCommandHandler 
-        : BaseValidatingCommandHandler<AddIngredientsToCurrentCartRequest, CartModel>
+    public class UpdateCartItemsCommandHandler 
+        : BaseValidatingCommandHandler<UpdateCartItemsRequest, CartModel>
     {
-        public AddIngredientsToCurrentCartCommandHandler(
+        public UpdateCartItemsCommandHandler(
             IRecipeDomainContext recipeDomainContext, 
-            IEnumerable<ICommandRequestValidator<AddIngredientsToCurrentCartRequest, CartModel>> commandRequestValidators) 
+            IEnumerable<ICommandRequestValidator<UpdateCartItemsRequest, CartModel>> commandRequestValidators) 
             : base(recipeDomainContext, commandRequestValidators)
         {}
 
-        public override async Task<CartModel> DoHandleRequest(AddIngredientsToCurrentCartRequest request, CancellationToken cancellationToken)
+        public override async Task<CartModel> DoHandleRequest(UpdateCartItemsRequest request, CancellationToken cancellationToken)
         {
             var currentCart = await RecipeDomainContext
                 .Carts
@@ -38,7 +38,7 @@ namespace RecipeManager.Core.Features.Cart.Commands.Handlers
                 throw new NoCurrentCartException($"No current cart exists [User ID = {request.User.Id}");
             }
 
-            var cartItems = request.Ingredients.Select(i => new CartItem()
+            var cartItems = request.CartItemUpdates.Select(i => new CartItem()
             {
                 CartId = currentCart.Id,
                 CreatedAt = DateTime.UtcNow,
@@ -48,7 +48,14 @@ namespace RecipeManager.Core.Features.Cart.Commands.Handlers
             currentCart.Items = cartItems.ToList();
 
             await RecipeDomainContext.SaveChangesAsync();
-
+            
+            // Refresh the current cart entity
+            currentCart = await RecipeDomainContext
+                .Carts
+                .Include(c => c.Items)
+                .ThenInclude(ci => ci.Ingredient)
+                .FirstOrDefaultAsync(c => c.UserId == request.User.Id && c.IsCurrent);
+            
             return CartModel.From(currentCart);
         }
     }

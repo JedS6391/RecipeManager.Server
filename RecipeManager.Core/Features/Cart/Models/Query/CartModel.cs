@@ -13,12 +13,7 @@ namespace RecipeManager.Core.Features.Cart.Models.Query
         /// Gets the identifier.
         /// </summary>
         public Guid Id { get; private set; }
-        
-        /// <summary>
-        /// Gets or sets the user identifier of this cart.
-        /// </summary>
-        public string UserId { get; private set; }
-        
+
         /// <summary>
         /// Gets or sets the date and time this cart was created.
         /// </summary>
@@ -39,7 +34,6 @@ namespace RecipeManager.Core.Features.Cart.Models.Query
             return new CartModel()
             {
                 Id = cart.Id,
-                UserId = cart.UserId,
                 CreatedAt = cart.CreatedAt,
                 IsCurrent = cart.IsCurrent,
                 Items = cart.Items?.Select(CartItemModel.From).ToList()

@@ -3,9 +3,9 @@ using System;
 namespace RecipeManager.Core.Features.Cart.Models.Command
 {
     /// <summary>
-    /// Defines a model for adding an ingredient to a cart.
+    /// Defines a model for a cart item update.
     /// </summary>
-    public class AddIngredientToCartModel
+    public class CartItemUpdateModel
     {
         /// <summary>
         /// Gets or sets the identifier of the ingredient to add.

@@ -12,22 +12,22 @@ using RecipeManager.Core.Infrastructure.Abstract;
 namespace RecipeManager.Core.Features.Cart.Commands.Validation
 {
     /// <summary>
-    /// A command request validator for <see cref="AddIngredientsToCurrentCartRequest"/> requests.
+    /// A command request validator for <see cref="UpdateCartItemsRequest"/> requests.
     /// </summary>
-    public class AddIngredientsToCurrentCartCommandRequestValidator
-        : ICommandRequestValidator<AddIngredientsToCurrentCartRequest, CartModel>
+    public class UpdateCartItemsCommandRequestValidator
+        : ICommandRequestValidator<UpdateCartItemsRequest, CartModel>
     {
         private readonly IRecipeDomainContext _recipeDomainContext;
         
-        public AddIngredientsToCurrentCartCommandRequestValidator(IRecipeDomainContext recipeDomainContext)
+        public UpdateCartItemsCommandRequestValidator(IRecipeDomainContext recipeDomainContext)
         {
             _recipeDomainContext = recipeDomainContext;
         }
         
-        public Task Validate(AddIngredientsToCurrentCartRequest request)
+        public Task Validate(UpdateCartItemsRequest request)
         {
             var ingredientIds = new HashSet<Guid>(
-                request.Ingredients.Select(i => i.IngredientId));
+                request.CartItemUpdates.Select(i => i.IngredientId));
 
             var ingredientRecipes = _recipeDomainContext
                 .Ingredients
@@ -50,7 +50,7 @@ namespace RecipeManager.Core.Features.Cart.Commands.Validation
 
         private static class ValidationErrors
         {
-            public static string IngredientDoesNotBelongToOneOfUsersRecipes = $"{nameof(AddIngredientsToCurrentCartRequest)}:ingredient-does-not-belong-to-users-recipes";
+            public static string IngredientDoesNotBelongToOneOfUsersRecipes = $"{nameof(UpdateCartItemsCommandRequestValidator)}:ingredient-does-not-belong-to-users-recipes";
         }
     }
 }

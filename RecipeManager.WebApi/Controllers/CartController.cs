@@ -60,12 +60,12 @@ namespace RecipeManager.WebApi.Controllers
         [Route("current/items")]
         [AuthorizationScope(AuthorizationScopes.Cart.Write)]
         [ProducesResponseType(typeof(CartModel), StatusCodes.Status200OK)]
-        public async Task<CartModel> UpdateCartItems([FromBody] IEnumerable<AddIngredientToCartModel> request)
+        public async Task<CartModel> UpdateCartItems([FromBody] IEnumerable<CartItemUpdateModel> request)
         {
-            return await _mediator.Send(new AddIngredientsToCurrentCartRequest()
+            return await _mediator.Send(new UpdateCartItemsRequest()
             {
                 User = _identityProvider.Current,
-                Ingredients = request
+                CartItemUpdates = request
             });
         }
     }

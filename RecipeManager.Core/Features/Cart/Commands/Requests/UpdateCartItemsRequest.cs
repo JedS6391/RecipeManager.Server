@@ -7,9 +7,9 @@ using RecipeManager.Domain.Entities;
 namespace RecipeManager.Core.Features.Cart.Commands.Requests
 {
     /// <summary>
-    /// Represents a command request to add the given ingredients to the specified users current cart.
+    /// Represents a command request to update the items in the current cart.
     /// </summary>
-    public class AddIngredientsToCurrentCartRequest : IRequest<CartModel>
+    public class UpdateCartItemsRequest : IRequest<CartModel>
     {
         /// <summary>
         /// Gets or sets the user whose cart the ingredients will be added to.
@@ -17,8 +17,8 @@ namespace RecipeManager.Core.Features.Cart.Commands.Requests
         public User User { get; set; }
         
         /// <summary>
-        /// Gets or sets the ingredients to add to the current cart.
+        /// Gets or sets the updates to the cart items.
         /// </summary>
-        public IEnumerable<AddIngredientToCartModel> Ingredients { get; set; }
+        public IEnumerable<CartItemUpdateModel> CartItemUpdates { get; set; }
     }
 }
