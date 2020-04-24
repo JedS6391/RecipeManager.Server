@@ -1,4 +1,4 @@
-name: Build and ASP.Net Core app - recipe-manager-api
+name: Build ASP.Net Core app - recipe-manager-api
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
       - develop
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
