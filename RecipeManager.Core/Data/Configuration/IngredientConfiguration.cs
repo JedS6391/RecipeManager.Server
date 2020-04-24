@@ -28,11 +28,20 @@ namespace RecipeManager.Data.EntityConfiguration
             builder
                 .Property(i => i.Amount)
                 .HasColumnName("ingredient_amount");
+            
+            builder
+                .Property(i => i.CategoryId)
+                .HasColumnName("ingredient_categoryId");
 
             builder
                 .HasOne(i => i.Recipe)
                 .WithMany(r => r.Ingredients)
                 .HasForeignKey(i => i.RecipeId);
+            
+            builder
+                .HasOne(i => i.Category)
+                .WithMany(ic => ic.Ingredients)
+                .HasForeignKey(i => i.CategoryId);
         }
     }
 }

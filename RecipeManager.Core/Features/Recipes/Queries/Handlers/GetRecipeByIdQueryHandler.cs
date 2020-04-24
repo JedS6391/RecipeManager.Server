@@ -27,6 +27,7 @@ namespace RecipeManager.Core.Features.Recipes.Queries.Handlers
             var recipe = await RecipeDomainContext
                 .Recipes
                 .Include(r => r.Ingredients)
+                    .ThenInclude(i => i.Category)
                 .Include(r => r.Instructions)
                 .FirstOrDefaultAsync(r => r.UserId == request.User.Id && r.Id == request.Id);
 

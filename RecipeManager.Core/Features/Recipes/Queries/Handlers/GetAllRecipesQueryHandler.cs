@@ -28,6 +28,7 @@ namespace RecipeManager.Core.Features.Recipes.Queries.Handlers
             var recipes = await RecipeDomainContext
                 .Recipes
                 .Include(r => r.Ingredients)
+                    .ThenInclude(i => i.Category)
                 .Include(r => r.Instructions)
                 .Where(r => r.UserId == request.User.Id)
                 .ToListAsync();

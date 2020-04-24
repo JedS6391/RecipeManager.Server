@@ -27,6 +27,11 @@ namespace RecipeManager.Core.Features.Recipes.Models.Query
         /// Gets the amount.
         /// </summary>
         public string Amount { get; private set; }
+        
+        /// <summary>
+        /// Gets the category of this ingredient.
+        /// </summary>
+        public IngredientCategoryModel Category { get; private set; }
 
         /// <summary>
         /// Creates an <see cref="IngredientModel"/> instance from the given <see cref="Ingredient"/>.
@@ -40,7 +45,8 @@ namespace RecipeManager.Core.Features.Recipes.Models.Query
                 Id = ingredient.Id,
                 RecipeId = ingredient.RecipeId,
                 Name = ingredient.Name,
-                Amount = ingredient .Amount
+                Amount = ingredient.Amount,
+                Category = IngredientCategoryModel.From(ingredient.Category)
             };
         }
     }
