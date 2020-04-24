@@ -3,6 +3,7 @@ name: Build and ASP.Net Core app - recipe-manager-api
 on:
   push:
     branches:
+      - feature/**
       - develop
 
 jobs:
