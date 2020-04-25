@@ -33,6 +33,11 @@ namespace RecipeManager.Core.Features.Recipes.Commands.Handlers
                 .Include(r => r.Instructions)
                 .FirstOrDefaultAsync(r => r.UserId == request.User.Id && r.Id == request.RecipeId);
 
+            var existingIngredientCategories = await RecipeDomainContext
+                .IngredientCategories
+                .Where(ic => ic.UserId == request.User.Id)
+                .ToListAsync();
+            
             if (recipe == null)
             {
                 throw new RecipeNotFoundException($"No recipe found [ID = {request.RecipeId}]");
@@ -43,6 +48,14 @@ namespace RecipeManager.Core.Features.Recipes.Commands.Handlers
                 RecipeId = request.RecipeId,
                 Name = i.Name,
                 Amount = i.Amount,
+                // Try to find the existing category, creating a new one if none is found.
+                Category = existingIngredientCategories
+                    .FirstOrDefault(ic => ic.Name == i.Category) ??
+                           new IngredientCategory()
+                           {
+                               Name = i.Category,
+                               UserId = request.User.Id
+                           }
             });
 
             recipe.Ingredients = ingredients.ToList();

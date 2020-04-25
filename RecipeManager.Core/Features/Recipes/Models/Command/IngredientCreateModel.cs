@@ -14,5 +14,10 @@
         /// Gets or sets the amount of the ingredient.
         /// </summary>
         public string Amount { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the category.
+        /// </summary>
+        public string Category { get; set; }
     }
 }

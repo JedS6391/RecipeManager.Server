@@ -11,3 +11,11 @@ BEGIN
         ingredient_amount NVARCHAR(250)
     )
 END
+
+IF NOT EXISTS (SELECT 1
+               FROM INFORMATION_SCHEMA.COLUMNS
+               WHERE TABLE_NAME = 'tblIngredient'
+               AND COLUMN_NAME = 'ingredient_categoryId')
+BEGIN 
+    ALTER TABLE tblIngredient ADD ingredient_categoryId UNIQUEIDENTIFIER
+END

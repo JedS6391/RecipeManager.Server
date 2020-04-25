@@ -30,8 +30,18 @@ namespace RecipeManager.Domain.Entities
         public string Amount { get; set; }
 
         /// <summary>
+        /// Gets or sets the optional category identifier.
+        /// </summary>
+        public Guid? CategoryId { get; set; }
+        
+        /// <summary>
         /// Gets or sets the recipe that this ingredient is for.
         /// </summary>
         public Recipe Recipe { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the category of this ingredient.
+        /// </summary>
+        public IngredientCategory Category { get; set; }
     }
 }
