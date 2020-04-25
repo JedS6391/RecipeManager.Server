@@ -58,6 +58,21 @@ namespace RecipeManager.WebApi.Controllers
                 User = _identityProvider.Current
             });
         }
+        
+        /// <summary>
+        /// Gets the details of all ingredient categories defined for the current user.
+        /// </summary>
+        [HttpGet]
+        [Route("ingredients/categories")]
+        [AuthorizationScope(AuthorizationScopes.Recipes.Read)]
+        [ProducesResponseType(typeof(IEnumerable<IngredientCategoryModel>), StatusCodes.Status200OK)]
+        public async Task<IEnumerable<IngredientCategoryModel>> GetAllIngredientCategories()
+        {
+            return await _mediator.Send(new GetAllIngredientCategoriesQuery()
+            {
+                User = _identityProvider.Current
+            });
+        }
 
         /// <summary>
         /// Creates a new recipe for the current user.

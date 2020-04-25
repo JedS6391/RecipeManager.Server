@@ -20,6 +20,11 @@ namespace RecipeManager.Core.Data.Abstract
         DbSet<Ingredient> Ingredients { get; set; }
 
         /// <summary>
+        /// Gets or sets the <see cref="IngredientCategory"/> entities.
+        /// </summary>
+        DbSet<IngredientCategory> IngredientCategories { get; set; }
+        
+        /// <summary>
         /// Gets or sets the <see cref="Instruction"/> entities.
         /// </summary>
         DbSet<Instruction> Instructions { get; set; }
