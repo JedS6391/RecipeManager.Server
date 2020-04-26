@@ -54,6 +54,7 @@ namespace RecipeManager.Core.Features.Cart.Commands.Handlers
                 .Carts
                 .Include(c => c.Items)
                 .ThenInclude(ci => ci.Ingredient)
+                .ThenInclude(i => i.Category)
                 .FirstOrDefaultAsync(c => c.UserId == request.User.Id && c.IsCurrent);
             
             return CartModel.From(currentCart);

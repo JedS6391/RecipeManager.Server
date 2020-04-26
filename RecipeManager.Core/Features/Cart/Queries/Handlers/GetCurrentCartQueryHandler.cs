@@ -26,6 +26,7 @@ namespace RecipeManager.Core.Features.Cart.Queries.Handlers
                 .Carts
                 .Include(c => c.Items)
                 .ThenInclude(ci => ci.Ingredient)
+                .ThenInclude(i => i.Category)
                 .FirstOrDefaultAsync(c => c.UserId == request.User.Id && c.IsCurrent);
 
             return cart == null ? 
