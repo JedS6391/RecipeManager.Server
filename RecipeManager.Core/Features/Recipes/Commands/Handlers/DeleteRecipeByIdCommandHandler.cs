@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using RecipeManager.Core.Data.Abstract;
-using RecipeManager.Core.Features.Cart.Queries.Requests;
 using RecipeManager.Core.Features.Recipes.Commands.Requests;
 using RecipeManager.Core.Infrastructure.Abstract;
 
 namespace RecipeManager.Core.Features.Recipes.Commands.Handlers
 {
+    /// <summary>
+    /// Handles all <see cref="DeleteRecipeByIdRequest"/> requests.
+    /// </summary>
     public class DeleteRecipeByIdCommandHandler 
         : BaseCommandHandler<DeleteRecipeByIdRequest, Unit>
     {
