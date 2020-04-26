@@ -1,8 +1,7 @@
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using RecipeManager.Core.Data.Abstract;
+using RecipeManager.Core.Data.Extensions;
 using RecipeManager.Core.Features.Cart.Exceptions;
 using RecipeManager.Core.Features.Cart.Models.Query;
 using RecipeManager.Core.Features.Cart.Queries.Requests;
@@ -22,12 +21,7 @@ namespace RecipeManager.Core.Features.Cart.Queries.Handlers
         /// <inheritdoc/>
         public override async Task<CartModel> Handle(GetCurrentCartQuery request, CancellationToken cancellationToken)
         {
-            var cart = await RecipeDomainContext
-                .Carts
-                .Include(c => c.Items)
-                .ThenInclude(ci => ci.Ingredient)
-                .ThenInclude(i => i.Category)
-                .FirstOrDefaultAsync(c => c.UserId == request.User.Id && c.IsCurrent);
+            var cart = await RecipeDomainContext.GetCurrentCart(request.User);
 
             return cart == null ? 
                 throw new NoCurrentCartException($"No current cart exists [User ID = {request.User.Id}]") : 

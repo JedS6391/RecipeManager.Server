@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using RecipeManager.Core.Data.Abstract;
+using RecipeManager.Core.Data.Extensions;
 using RecipeManager.Core.Features.Recipes.Models.Query;
 using RecipeManager.Core.Features.Recipes.Queries.Requests;
 using RecipeManager.Core.Infrastructure.Abstract;
@@ -26,11 +27,7 @@ namespace RecipeManager.Core.Features.Recipes.Queries.Handlers
         public override async Task<IEnumerable<RecipeModel>> Handle(GetAllRecipesQuery request, CancellationToken cancellationToken)
         {
             var recipes = await RecipeDomainContext
-                .Recipes
-                .Include(r => r.Ingredients)
-                    .ThenInclude(i => i.Category)
-                .Include(r => r.Instructions)
-                .Where(r => r.UserId == request.User.Id)
+                .GetRecipesForUser(request.User)
                 .ToListAsync();
 
             return recipes.Select(RecipeModel.From);
