@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using RecipeManager.Core.Data.Abstract;
+using RecipeManager.Core.Data.Extensions;
 using RecipeManager.Core.Features.Cart.Commands.Requests;
 using RecipeManager.Core.Features.Cart.Exceptions;
 using RecipeManager.Core.Features.Cart.Models.Query;
@@ -27,11 +28,7 @@ namespace RecipeManager.Core.Features.Cart.Commands.Handlers
 
         public override async Task<CartModel> DoHandleRequest(UpdateCartItemsRequest request, CancellationToken cancellationToken)
         {
-            var currentCart = await RecipeDomainContext
-                .Carts
-                .Include(c => c.Items)
-                .ThenInclude(ci => ci.Ingredient)
-                .FirstOrDefaultAsync(c => c.UserId == request.User.Id && c.IsCurrent);
+            var currentCart = await RecipeDomainContext.GetCurrentCart(request.User);
 
             if (currentCart == null)
             {

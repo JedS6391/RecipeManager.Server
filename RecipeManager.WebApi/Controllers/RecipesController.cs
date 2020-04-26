@@ -28,6 +28,20 @@ namespace RecipeManager.WebApi.Controllers
             _mediator = mediator;
             _identityProvider = identityProvider;
         }
+        
+        /// <summary>
+        /// Gets the details of all recipes defined for the current user.
+        /// </summary>
+        [HttpGet]
+        [AuthorizationScope(AuthorizationScopes.Recipes.Read)]
+        [ProducesResponseType(typeof(IEnumerable<RecipeModel>), StatusCodes.Status200OK)]
+        public async Task<IEnumerable<RecipeModel>> GetAll()
+        {
+            return await _mediator.Send(new GetAllRecipesQuery()
+            {
+                User = _identityProvider.Current
+            });
+        }
 
         /// <summary>
         /// Gets the details of the recipe with the specified ID for the current user.
@@ -45,20 +59,6 @@ namespace RecipeManager.WebApi.Controllers
             });
         }
 
-        /// <summary>
-        /// Gets the details of all recipes defined for the current user.
-        /// </summary>
-        [HttpGet]
-        [AuthorizationScope(AuthorizationScopes.Recipes.Read)]
-        [ProducesResponseType(typeof(IEnumerable<RecipeModel>), StatusCodes.Status200OK)]
-        public async Task<IEnumerable<RecipeModel>> GetAll()
-        {
-            return await _mediator.Send(new GetAllRecipesQuery()
-            {
-                User = _identityProvider.Current
-            });
-        }
-        
         /// <summary>
         /// Gets the details of all ingredient categories defined for the current user.
         /// </summary>
@@ -126,6 +126,24 @@ namespace RecipeManager.WebApi.Controllers
             {
                 RecipeId = recipeId,
                 Ingredients = request,
+                User = _identityProvider.Current
+            });
+        }
+
+        /// <summary>
+        /// Deletes the recipe with the specified ID for the current user.
+        /// </summary>
+        /// <param name="recipeId"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("{recipeId}")]
+        [AuthorizationScope(AuthorizationScopes.Recipes.Write)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task DeleteRecipe(Guid recipeId)
+        {
+            await _mediator.Send(new DeleteRecipeByIdRequest()
+            {
+                RecipeId = recipeId,
                 User = _identityProvider.Current
             });
         }
