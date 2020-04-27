@@ -40,6 +40,8 @@ namespace RecipeManager.Core.Data.Extensions
                 .Include(r => r.Ingredients)
                     .ThenInclude(i => i.Category)
                 .Include(r => r.Instructions)
+                .Include(r => r.RecipeGroupLinks)
+                    .ThenInclude(rgl => rgl.RecipeGroup)
                 .Where(r => r.UserId == user.Id);
         }
     }

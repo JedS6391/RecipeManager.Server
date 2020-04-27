@@ -73,6 +73,21 @@ namespace RecipeManager.WebApi.Controllers
                 User = _identityProvider.Current
             });
         }
+        
+        /// <summary>
+        /// Gets the details of all recipe groups defined for the current user.
+        /// </summary>
+        [HttpGet]
+        [Route("groups")]
+        [AuthorizationScope(AuthorizationScopes.Recipes.Read)]
+        [ProducesResponseType(typeof(IEnumerable<RecipeGroupModel>), StatusCodes.Status200OK)]
+        public async Task<IEnumerable<RecipeGroupModel>> GetAllRecipeGroups()
+        {
+            return await _mediator.Send(new GetAllRecipeGroupsQuery()
+            {
+                User = _identityProvider.Current
+            });
+        }
 
         /// <summary>
         /// Creates a new recipe for the current user.
@@ -114,6 +129,7 @@ namespace RecipeManager.WebApi.Controllers
         /// <summary>
         /// Updates the instructions of the given recipe for the current user.
         /// </summary>
+        /// <param name="recipeId"></param>
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPut]
@@ -126,6 +142,27 @@ namespace RecipeManager.WebApi.Controllers
             {
                 RecipeId = recipeId,
                 Ingredients = request,
+                User = _identityProvider.Current
+            });
+        }
+        
+        /// <summary>
+        /// Updates the groups of the given recipe for the current user.
+        /// </summary>
+        /// <param name="recipeId"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("{recipeId}/groups")]
+        [AuthorizationScope(AuthorizationScopes.Recipes.Write)]
+        [ProducesResponseType(typeof(RecipeModel), StatusCodes.Status200OK)]
+        public async Task<RecipeModel> UpdateRecipeGroups(Guid recipeId, [FromBody] RecipeGroupUpdateModel request)
+        {
+            return await _mediator.Send(new UpdateRecipeGroupsRequest()
+            {
+                RecipeId = recipeId,
+                RecipeGroupsToCreate = request.RecipeGroupsToCreate,
+                RecipeGroupsToAssociate = request.RecipeGroupsToAssociate,
                 User = _identityProvider.Current
             });
         }

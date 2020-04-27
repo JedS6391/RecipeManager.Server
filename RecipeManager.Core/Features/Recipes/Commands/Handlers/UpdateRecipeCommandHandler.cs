@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using RecipeManager.Core.Data.Abstract;
+using RecipeManager.Core.Data.Extensions;
 using RecipeManager.Core.Features.Recipes.Commands.Requests;
 using RecipeManager.Core.Features.Recipes.Exceptions;
 using RecipeManager.Core.Features.Recipes.Models.Query;
@@ -24,10 +25,8 @@ namespace RecipeManager.Core.Features.Recipes.Commands.Handlers
         public override async Task<RecipeModel> DoHandleRequest(UpdateRecipeRequest request, CancellationToken cancellationToken)
         {
             var recipe = await RecipeDomainContext
-                .Recipes
-                .Include(r => r.Ingredients)
-                .Include(r => r.Instructions)
-                .FirstOrDefaultAsync(r => r.UserId == request.User.Id && r.Id == request.RecipeId);
+                .GetRecipesForUser(request.User)
+                .FirstOrDefaultAsync(r => r.Id == request.RecipeId);
 
             if (recipe == null)
             {
