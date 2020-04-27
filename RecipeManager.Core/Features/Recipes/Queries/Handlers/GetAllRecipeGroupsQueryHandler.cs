@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using RecipeManager.Core.Data.Abstract;
+using RecipeManager.Core.Data.Extensions;
 using RecipeManager.Core.Features.Recipes.Models.Query;
 using RecipeManager.Core.Features.Recipes.Queries.Requests;
 using RecipeManager.Core.Infrastructure.Abstract;
@@ -25,7 +26,7 @@ namespace RecipeManager.Core.Features.Recipes.Queries.Handlers
         {
             var recipeGroups = await RecipeDomainContext
                 .RecipeGroups
-                .Where(rg => rg.UserId == request.User.Id)
+                .ForUser(request.User)
                 .ToListAsync();
 
             return recipeGroups.Select(RecipeGroupModel.From);

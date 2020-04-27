@@ -10,6 +10,7 @@ using RecipeManager.Core.Features.Cart.Exceptions;
 using RecipeManager.Core.Features.Cart.Models.Command;
 using RecipeManager.Core.Features.Cart.Models.Query;
 using RecipeManager.Core.Features.Cart.Queries.Requests;
+using RecipeManager.Core.Infrastructure;
 using RecipeManager.WebApi.Security;
 
 namespace RecipeManager.WebApi.Controllers

@@ -7,7 +7,7 @@ namespace RecipeManager.Domain.Entities
     /// <summary>
     /// Represents a category of an <see cref="Ingredient"/>.
     /// </summary>
-    public class IngredientCategory : IIdentifiable<Guid>
+    public class IngredientCategory : IIdentifiable<Guid>, IUserIdentifiable
     {
         /// <summary>
         /// Gets the identifier.

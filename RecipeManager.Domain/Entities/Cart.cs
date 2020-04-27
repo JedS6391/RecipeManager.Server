@@ -8,7 +8,7 @@ namespace RecipeManager.Domain.Entities
     /// Represents a cart for a user.
     /// </summary>
     /// <remarks>A cart is composed of a collection of cart items. A user could have multiple carts.</remarks>
-    public class Cart : IIdentifiable<Guid>
+    public class Cart : IIdentifiable<Guid>, IUserIdentifiable
     {
         /// <summary>
         /// Gets the identifier.

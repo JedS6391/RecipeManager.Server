@@ -34,7 +34,7 @@ namespace RecipeManager.Core.Features.Recipes.Commands.Handlers
 
             var existingIngredientCategories = await RecipeDomainContext
                 .IngredientCategories
-                .Where(ic => ic.UserId == request.User.Id)
+                .ForUser(request.User)
                 .ToListAsync();
             
             if (recipe == null)

@@ -9,7 +9,7 @@ namespace RecipeManager.Domain.Entities
     /// Represents a recipe.
     /// </summary>
     /// <remarks>A recipe is composed of a collection of ingredients and instructions.</remarks>
-    public class Recipe : IIdentifiable<Guid>
+    public class Recipe : IIdentifiable<Guid>, IUserIdentifiable
     {
         /// <summary>
         /// Gets or sets the identifier.

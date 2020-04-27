@@ -1,6 +1,6 @@
 ﻿using RecipeManager.Domain.Entities;
 
-namespace RecipeManager.WebApi.Security
+namespace RecipeManager.Core.Infrastructure
 {
     /// <summary>
     /// Defines a provider for the current user for a given context.

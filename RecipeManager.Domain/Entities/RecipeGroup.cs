@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RecipeManager.Domain.Entities.Abstract;
 
 namespace RecipeManager.Domain.Entities
 {
     /// <summary>
     /// Represents a recipe group.
     /// </summary>
-    public class RecipeGroup
+    public class RecipeGroup : IIdentifiable<Guid>, IUserIdentifiable
     {
         /// <summary>
         /// Gets the identifier.
