@@ -19,6 +19,9 @@ namespace RecipeManager.Core.Data
 
         /// <inheritdoc/>
         public DbSet<Recipe> Recipes { get; set; }
+        
+        /// <inheritdoc/>
+        public DbSet<RecipeGroup> RecipeGroups { get; set; }
 
         /// <inheritdoc/>
         public DbSet<Ingredient> Ingredients { get; set; }

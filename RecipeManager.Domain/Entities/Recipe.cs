@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using RecipeManager.Domain.Entities.Abstract;
 
 namespace RecipeManager.Domain.Entities
@@ -8,7 +9,7 @@ namespace RecipeManager.Domain.Entities
     /// Represents a recipe.
     /// </summary>
     /// <remarks>A recipe is composed of a collection of ingredients and instructions.</remarks>
-    public class Recipe : IIdentifiable<Guid>
+    public class Recipe : IIdentifiable<Guid>, IUserIdentifiable
     {
         /// <summary>
         /// Gets or sets the identifier.
@@ -29,6 +30,16 @@ namespace RecipeManager.Domain.Entities
         /// Gets or sets the instructions.
         /// </summary>
         public ICollection<Instruction> Instructions { get; set; }
+        
+        /// <summary>
+        /// Gets the recipe group links.
+        /// </summary>
+        public ICollection<RecipeGroupLink> RecipeGroupLinks { get; set; }
+
+        /// <summary>
+        /// Gets the recipe groups.
+        /// </summary>
+        public IEnumerable<RecipeGroup> RecipeGroups => RecipeGroupLinks.Select(rgl => rgl.RecipeGroup);
 
         /// <summary>
         /// Gets or sets the identifier of the user this recipe belongs to.

@@ -25,6 +25,8 @@ namespace RecipeManager.Core.Data.Configuration
                 .Property(r => r.UserId)
                 .HasColumnName("recipe_userId");
 
+            builder.Ignore(r => r.RecipeGroups);
+
             builder
                 .HasMany(r => r.Ingredients)
                 .WithOne(i => i.Recipe)
@@ -34,6 +36,11 @@ namespace RecipeManager.Core.Data.Configuration
                 .HasMany(r => r.Instructions)
                 .WithOne(i => i.Recipe)
                 .HasForeignKey(i => i.RecipeId);
+
+            builder
+                .HasMany(r => r.RecipeGroupLinks)
+                .WithOne(rgl => rgl.Recipe)
+                .HasForeignKey(rgl => rgl.RecipeId);
         }
     }
 }

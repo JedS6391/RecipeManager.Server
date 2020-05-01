@@ -13,6 +13,11 @@ namespace RecipeManager.Core.Data.Abstract
         /// Gets or sets the <see cref="Recipe"/> entities.
         /// </summary>
         DbSet<Recipe> Recipes { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the <see cref="RecipeGroup"/> entities.
+        /// </summary>
+        DbSet<RecipeGroup> RecipeGroups { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="Ingredient"/> entities.

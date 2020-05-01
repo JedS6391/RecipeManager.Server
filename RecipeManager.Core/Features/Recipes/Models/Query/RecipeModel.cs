@@ -29,6 +29,11 @@ namespace RecipeManager.Core.Features.Recipes.Models.Query
         /// Gets the instructions.
         /// </summary>
         public ICollection<InstructionModel> Instructions { get; private set; }
+        
+        /// <summary>
+        /// Gets the recipe groups.
+        /// </summary>
+        public ICollection<RecipeGroupModel> Groups { get; private set; }
 
         /// <summary>
         /// Creates a <see cref="RecipeModel"/> instance from the given <see cref="Recipe"/>.
@@ -42,7 +47,8 @@ namespace RecipeManager.Core.Features.Recipes.Models.Query
                 Id = recipe.Id,
                 Name = recipe.Name,
                 Ingredients = recipe.Ingredients?.Select(IngredientModel.From).ToList(),
-                Instructions = recipe.Instructions?.Select(InstructionModel.From).ToList()
+                Instructions = recipe.Instructions?.Select(InstructionModel.From).ToList(),
+                Groups = recipe.RecipeGroups.Select(RecipeGroupModel.From).ToList()
             };
         }
     }

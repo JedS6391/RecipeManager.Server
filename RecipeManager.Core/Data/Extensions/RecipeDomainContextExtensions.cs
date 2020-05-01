@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using RecipeManager.Core.Data.Abstract;
 using RecipeManager.Domain.Entities;
+using RecipeManager.Domain.Entities.Abstract;
 
 namespace RecipeManager.Core.Data.Extensions
 {
@@ -24,7 +25,8 @@ namespace RecipeManager.Core.Data.Extensions
                 .Include(c => c.Items)
                 .ThenInclude(ci => ci.Ingredient)
                 .ThenInclude(i => i.Category)
-                .FirstOrDefaultAsync(c => c.UserId == user.Id && c.IsCurrent);
+                .ForUser(user)
+                .FirstOrDefaultAsync(c => c.IsCurrent);
         }
 
         /// <summary>
@@ -38,9 +40,26 @@ namespace RecipeManager.Core.Data.Extensions
             return recipeDomainContext
                 .Recipes
                 .Include(r => r.Ingredients)
-                    .ThenInclude(i => i.Category)
+                .ThenInclude(i => i.Category)
                 .Include(r => r.Instructions)
-                .Where(r => r.UserId == user.Id);
+                .Include(r => r.RecipeGroupLinks)
+                .ThenInclude(rgl => rgl.RecipeGroup)
+                .ForUser(user);
+        }
+
+        /// <summary>
+        /// Filters a set of entities to those for the specified user.
+        /// </summary>
+        /// <param name="queryable"></param>
+        /// <param name="user"></param>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <returns></returns>
+        public static IQueryable<TEntity> ForUser<TEntity>(
+            this IQueryable<TEntity> queryable, 
+            User user)
+            where TEntity : IUserIdentifiable
+        {
+            return queryable.Where(e => e.UserId == user.Id);
         }
     }
 }

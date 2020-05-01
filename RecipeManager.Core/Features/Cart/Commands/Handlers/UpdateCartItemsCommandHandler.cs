@@ -47,12 +47,7 @@ namespace RecipeManager.Core.Features.Cart.Commands.Handlers
             await RecipeDomainContext.SaveChangesAsync();
             
             // Refresh the current cart entity
-            currentCart = await RecipeDomainContext
-                .Carts
-                .Include(c => c.Items)
-                .ThenInclude(ci => ci.Ingredient)
-                .ThenInclude(i => i.Category)
-                .FirstOrDefaultAsync(c => c.UserId == request.User.Id && c.IsCurrent);
+            currentCart = await RecipeDomainContext.GetCurrentCart(request.User);
             
             return CartModel.From(currentCart);
         }
