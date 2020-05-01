@@ -27,6 +27,7 @@ namespace RecipeManager.Core.Features.Recipes.Queries.Handlers
             var recipeGroups = await RecipeDomainContext
                 .RecipeGroups
                 .ForUser(request.User)
+                .OrderBy(rg => rg.Name)
                 .ToListAsync();
 
             return recipeGroups.Select(RecipeGroupModel.From);

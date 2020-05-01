@@ -27,6 +27,7 @@ namespace RecipeManager.Core.Features.Recipes.Queries.Handlers
             var ingredientCategories = await RecipeDomainContext
                 .IngredientCategories
                 .ForUser(request.User)
+                .OrderBy(ic => ic.Name)
                 .ToListAsync();
 
             return ingredientCategories.Select(IngredientCategoryModel.From);

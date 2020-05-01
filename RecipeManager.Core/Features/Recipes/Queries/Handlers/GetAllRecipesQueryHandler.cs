@@ -28,6 +28,7 @@ namespace RecipeManager.Core.Features.Recipes.Queries.Handlers
         {
             var recipes = await RecipeDomainContext
                 .GetRecipesForUser(request.User)
+                .OrderBy(r => r.Name)
                 .ToListAsync();
 
             return recipes.Select(RecipeModel.From);
