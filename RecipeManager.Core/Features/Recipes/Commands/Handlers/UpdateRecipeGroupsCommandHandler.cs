@@ -14,6 +14,9 @@ using RecipeManager.Domain.Entities;
 
 namespace RecipeManager.Core.Features.Recipes.Commands.Handlers
 {
+    /// <summary>
+    /// Handles all <see cref="UpdateRecipeGroupsRequest"/> requests.
+    /// </summary>
     public class UpdateRecipeGroupsCommandHandler
         : BaseValidatingCommandHandler<UpdateRecipeGroupsRequest, RecipeModel>
     {
@@ -24,6 +27,7 @@ namespace RecipeManager.Core.Features.Recipes.Commands.Handlers
         {
         }
 
+        /// <inheritdoc/>
         public override async Task<RecipeModel> DoHandleRequest(UpdateRecipeGroupsRequest request, CancellationToken cancellationToken)
         {
             var recipe = await RecipeDomainContext
@@ -36,20 +40,7 @@ namespace RecipeManager.Core.Features.Recipes.Commands.Handlers
             }
             
             // First, create any new recipe groups.
-            var newRecipeGroups = new List<RecipeGroup>();
-            
-            foreach (var recipeGroup in request.RecipeGroupsToCreate)
-            {
-                var newRecipeGroup = new RecipeGroup()
-                {
-                    Name = recipeGroup.Name,
-                    UserId = request.User.Id
-                };
-                
-                await RecipeDomainContext.RecipeGroups.AddAsync(newRecipeGroup);
-
-                newRecipeGroups.Add(newRecipeGroup);
-            }
+            var newRecipeGroups = await CreateNewRecipeGroups(request);
 
             // Now, update the recipe group links
             recipe.RecipeGroupLinks = newRecipeGroups.Select(rg => new RecipeGroupLink()
@@ -76,5 +67,25 @@ namespace RecipeManager.Core.Features.Recipes.Commands.Handlers
             
             return RecipeModel.From(recipe);
         }
+
+        private async Task<IEnumerable<RecipeGroup>> CreateNewRecipeGroups(UpdateRecipeGroupsRequest request)
+        {
+            var newRecipeGroups = new List<RecipeGroup>();
+            
+            foreach (var recipeGroup in request.RecipeGroupsToCreate)
+            {
+                var newRecipeGroup = new RecipeGroup()
+                {
+                    Name = recipeGroup.Name,
+                    UserId = request.User.Id
+                };
+                
+                await RecipeDomainContext.RecipeGroups.AddAsync(newRecipeGroup);
+
+                newRecipeGroups.Add(newRecipeGroup);
+            }
+
+            return newRecipeGroups;
+        } 
     }
 }

@@ -9,7 +9,6 @@ using RecipeManager.Core.Features.Recipes.Commands.Requests;
 using RecipeManager.Core.Features.Recipes.Models.Query;
 using RecipeManager.Core.Features.Recipes.Models.Command;
 using RecipeManager.Core.Features.Recipes.Queries.Requests;
-using RecipeManager.Core.Infrastructure;
 using RecipeManager.WebApi.Security;
 
 namespace RecipeManager.WebApi.Controllers
