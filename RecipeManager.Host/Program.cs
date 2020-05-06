@@ -17,6 +17,7 @@ namespace RecipeManager.Host
                 .UseServiceProviderFactory(new AutofacServiceProviderFactory())
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseSentry();
                     webBuilder.UseStartup<Startup>();
                 });
     }
