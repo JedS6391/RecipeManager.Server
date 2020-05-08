@@ -27,6 +27,7 @@ namespace RecipeManager.Core.Features.Recipes.Commands.Handlers
                 Name = request.Name,
                 Ingredients = new Ingredient[] { },
                 Instructions = new Instruction[] { },
+                RecipeGroupLinks = new RecipeGroupLink[] {},
                 UserId = request.User.Id
             };
 
