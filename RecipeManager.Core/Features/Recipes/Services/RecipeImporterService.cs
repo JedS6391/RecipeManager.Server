@@ -12,6 +12,10 @@ using RecipeManager.Domain.Entities;
 
 namespace RecipeManager.Core.Features.Recipes.Services
 {
+    /// <summary>
+    /// An implementation of <see cref="IRecipeImporterService"/> that will
+    /// fetch the recipe content and parse a recipe from the JSON-LD information if any.
+    /// </summary>
     public class RecipeImporterService : IRecipeImporterService
     {
         private static readonly HttpClient HttpClient = new HttpClient();
@@ -57,6 +61,8 @@ namespace RecipeManager.Core.Features.Recipes.Services
 
         private bool TryExtractRecipe(string rawPageContent, out Recipe recipe)
         {
+            // The logic below is based on the assumption that the website is
+            // using the format described here: https://developers.google.com/search/docs/data-types/recipe
             var pageContent = new HtmlDocument();
                 
             pageContent.LoadHtml(rawPageContent);

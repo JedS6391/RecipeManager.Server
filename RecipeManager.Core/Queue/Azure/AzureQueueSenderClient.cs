@@ -6,6 +6,11 @@ using RecipeManager.Core.Queue.Contracts;
 
 namespace RecipeManager.Core.Queue.Azure
 {
+    /// <summary>
+    /// An implementation of <see cref="IQueueSenderClient{TMessage}"/> that will
+    /// sends messages to Azure queue storage.
+    /// </summary>
+    /// <typeparam name="TMessage"></typeparam>
     public class AzureQueueSenderClient<TMessage>
         : BaseAzureQueueClient, IQueueSenderClient<TMessage>
         where TMessage : Message

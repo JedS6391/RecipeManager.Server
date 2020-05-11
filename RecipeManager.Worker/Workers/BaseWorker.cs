@@ -6,12 +6,22 @@ using Microsoft.Extensions.Logging;
 
 namespace RecipeManager.Worker.Workers
 {
+    /// <summary>
+    /// Provides a set of base functionality for all workers.
+    /// </summary>
     public abstract class BaseWorker : BackgroundService
     {
+        /// <summary>
+        /// Gets a value that determines how long the worker should wait between each run.
+        /// </summary>
         protected virtual TimeSpan WaitTime { get; } = TimeSpan.FromSeconds(10);
-        protected readonly ILogger<BaseWorker> Logger;
+        
+        /// <summary>
+        /// Gets the logger for this worker.
+        /// </summary>
+        protected ILogger<BaseWorker> Logger { get; }
 
-        public BaseWorker(ILogger<BaseWorker> logger)
+        protected BaseWorker(ILogger<BaseWorker> logger)
         {
             Logger = logger;
         }
@@ -35,6 +45,11 @@ namespace RecipeManager.Worker.Workers
             }
         }
 
+        /// <summary>
+        /// The entry point for worker processing. This method will be called periodically based
+        /// on the interval defined by <see cref="WaitTime"/>.
+        /// </summary>
+        /// <returns></returns>
         protected abstract Task DoWork();
     }
 }

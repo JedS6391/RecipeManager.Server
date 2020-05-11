@@ -8,6 +8,9 @@ using RecipeManager.Core.Queue.Contracts;
 
 namespace RecipeManager.Core.Features.Recipes.Commands.Handlers
 {
+    /// <summary>
+    /// Handles all <see cref="ImportRecipeRequest"/> requests.
+    /// </summary>
     public class ImportRecipeCommandHandler
         : IRequestHandler<ImportRecipeRequest>
     {
@@ -20,6 +23,7 @@ namespace RecipeManager.Core.Features.Recipes.Commands.Handlers
             _queueClientFactory = queueClientFactory;
         }   
         
+        /// <inheritdoc/>
         public async Task<Unit> Handle(ImportRecipeRequest request, CancellationToken cancellationToken)
         {
             var message = new ImportRecipeMessage()

@@ -7,6 +7,10 @@ using RecipeManager.Core.Queue.Contracts;
 
 namespace RecipeManager.Worker.Workers
 {
+    /// <summary>
+    /// A worker that will attempt to process all <see cref="ImportRecipeMessage"/> in 
+    /// the queue and import them into the system.
+    /// </summary>
     public class RecipeImportWorker : BaseWorker
     {
         // TODO: Inject this?
