@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "RecipeManager.Worker": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
