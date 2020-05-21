@@ -12,15 +12,13 @@ namespace RecipeManager.Core.Queue.Abstract
         /// <summary>
         /// Gets a <see cref="IQueueSenderClient{TMessage}"/> instance.
         /// </summary>
-        /// <param name="queueName"></param>
         /// <returns></returns>
-        IQueueSenderClient<TMessage> GetSenderClient(string queueName);
+        IQueueSenderClient<TMessage> GetSenderClient();
         
         /// <summary>
         /// Gets a <see cref="IQueueReceiverClient{TMessage}"/> instance.
         /// </summary>
-        /// <param name="queueName"></param>
         /// <returns></returns>
-        IQueueReceiverClient<TMessage> GetReceiverClient(string queueName);
+        IQueueReceiverClient<TMessage> GetReceiverClient();
     }
 }

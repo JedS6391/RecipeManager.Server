@@ -19,9 +19,6 @@ namespace RecipeManager.Core.Features.Recipes.Commands.Handlers
     public class ImportRecipeCommandHandler
         : BaseCommandHandler<ImportRecipeRequest, RecipeImportJobModel>
     {
-        // TODO: Inject this?
-        private const string QueueName = "import-recipe-queue";
-        
         private readonly IQueueClientFactory<ImportRecipeMessage> _queueClientFactory;
         
         public ImportRecipeCommandHandler(
@@ -71,7 +68,7 @@ namespace RecipeManager.Core.Features.Recipes.Commands.Handlers
             };
 
             // Queue the job
-            var queue = _queueClientFactory.GetSenderClient(QueueName);
+            var queue = _queueClientFactory.GetSenderClient();
             
             await queue.SendMessageAsync(message);
             

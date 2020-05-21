@@ -11,20 +11,28 @@ namespace RecipeManager.Core.Queue.Azure
         : IQueueClientFactory<TMessage>
         where TMessage : Message
     {
+        private readonly IQueueNameProvider _queueNameProvider;
         private readonly IQueueConnectionDetailsProvider<AzureQueueConnectionDetails> _connectionDetailsProvider;
 
-        public AzureQueueClientFactory(IQueueConnectionDetailsProvider<AzureQueueConnectionDetails> connectionDetailsProvider)
+        public AzureQueueClientFactory(
+            IQueueNameProvider queueNameProvider,
+            IQueueConnectionDetailsProvider<AzureQueueConnectionDetails> connectionDetailsProvider)
         {
+            _queueNameProvider = queueNameProvider;
             _connectionDetailsProvider = connectionDetailsProvider;
         }
         
-        public IQueueSenderClient<TMessage> GetSenderClient(string queueName)
+        public IQueueSenderClient<TMessage> GetSenderClient()
         {
+            var queueName = _queueNameProvider.GetQueueNameForMessageType<TMessage>();
+            
             return new AzureQueueSenderClient<TMessage>(queueName, _connectionDetailsProvider);
         }
 
-        public IQueueReceiverClient<TMessage> GetReceiverClient(string queueName)
+        public IQueueReceiverClient<TMessage> GetReceiverClient()
         {
+            var queueName = _queueNameProvider.GetQueueNameForMessageType<TMessage>();
+            
             return new AzureQueueReceiverClient<TMessage>(queueName, _connectionDetailsProvider);
         }
     }

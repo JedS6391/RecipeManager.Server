@@ -13,9 +13,6 @@ namespace RecipeManager.Worker.Workers
     /// </summary>
     public class RecipeImportWorker : BaseWorker
     {
-        // TODO: Inject this?
-        private const string QueueName = "import-recipe-queue"; 
-        
         protected override TimeSpan WaitTime { get; } = TimeSpan.FromSeconds(30);
 
         private readonly IQueueClientFactory<ImportRecipeMessage> _queueClientFactory;
@@ -35,7 +32,7 @@ namespace RecipeManager.Worker.Workers
         {
             Logger.LogInformation("RecipeImportWorker running at: {time}", DateTimeOffset.Now);
 
-            var queue = _queueClientFactory.GetReceiverClient(QueueName);
+            var queue = _queueClientFactory.GetReceiverClient();
             
             while (true)
             {

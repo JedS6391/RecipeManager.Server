@@ -8,6 +8,10 @@ namespace RecipeManager.Core.Queue.Azure
         protected override void Load(ContainerBuilder builder)
         {
             builder
+                .RegisterType<AzureQueueNameProvider>()
+                .As<IQueueNameProvider>();
+            
+            builder
                 .RegisterType<AzureQueueConnectionDetailsProvider>()
                 .As<IQueueConnectionDetailsProvider<AzureQueueConnectionDetails>>();
             
