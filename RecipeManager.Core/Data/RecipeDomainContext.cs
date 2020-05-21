@@ -37,6 +37,9 @@ namespace RecipeManager.Core.Data
         
         /// <inheritdoc/>
         public DbSet<CartItem> CartItems { get; set; }
+        
+        /// <inheritdoc/>
+        public DbSet<RecipeImportJob> RecipeImportJobs { get; set; }
 
         /// <inheritdoc/>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

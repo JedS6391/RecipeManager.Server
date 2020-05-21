@@ -5,9 +5,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using System.Reflection;
+using System.Text.Json.Serialization;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Newtonsoft.Json.Converters;
 using RecipeManager.WebApi.Infrastucture.ExceptionHandling;
 
 namespace RecipeManager.Host
@@ -31,6 +33,9 @@ namespace RecipeManager.Host
             {
                 options.Filters.Add(new ValidationExceptionFilter());
                 options.Filters.Add(new NotFoundExceptionFilter());
+            }).AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
             
             builder.PartManager.ApplicationParts.Add(new AssemblyPart(webApiAssembly));

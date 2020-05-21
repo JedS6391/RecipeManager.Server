@@ -34,9 +34,9 @@ namespace RecipeManager.WebApi.Controllers
         [HttpPost]
         [AuthorizationScope(AuthorizationScopes.Recipes.Write)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task ImportRecipe([FromBody] RecipeImportModel request)
+        public async Task<RecipeImportJobModel> ImportRecipe([FromBody] RecipeImportModel request)
         {
-            await _mediator.Send(new ImportRecipeRequest()
+            return await _mediator.Send(new ImportRecipeRequest()
             {
                 RecipeUrl = request.RecipeUrl,
                 User = _identityProvider.Current

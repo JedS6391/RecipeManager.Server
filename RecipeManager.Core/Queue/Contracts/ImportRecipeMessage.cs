@@ -1,3 +1,6 @@
+using System;
+using RecipeManager.Domain.Entities;
+
 namespace RecipeManager.Core.Queue.Contracts
 {
     /// <summary>
@@ -5,6 +8,11 @@ namespace RecipeManager.Core.Queue.Contracts
     /// </summary>
     public class ImportRecipeMessage : Message
     {
+        /// <summary>
+        /// Gets or sets an identifier of the associated <see cref="RecipeImportJob"/>.
+        /// </summary>
+        public Guid JobId { get; set; }
+        
         /// <summary>
         /// Gets or sets the URL where the recipe details can be retreived from.
         /// </summary>
