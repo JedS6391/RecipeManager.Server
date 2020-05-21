@@ -18,6 +18,14 @@ namespace RecipeManager.Core.Features.Recipes.Models.Query
         /// Gets the status of the import job.
         /// </summary>
         public RecipeImportJobStatus Status { get; private set; }
+        
+        /// <summary>
+        /// Gets a <see cref="RecipeModel"/> for the recipe that was imported as a result of the job.
+        /// </summary>
+        /// <remarks>
+        /// Note that this will only have a value when the status is <see cref="RecipeImportJobStatus.Completed"/>.
+        /// </remarks>
+        public RecipeModel ImportedRecipe { get; private set; }
 
         /// <summary>
         /// Creates a <see cref="RecipeImportJobModel"/> instance from the given <see cref="RecipeImportJob"/>.
@@ -29,7 +37,8 @@ namespace RecipeManager.Core.Features.Recipes.Models.Query
             return new RecipeImportJobModel()
             {
                 Id = job.Id,
-                Status = job.Status
+                Status = job.Status,
+                ImportedRecipe = RecipeModel.From(job.ImportedRecipe)
             };
         }
     }

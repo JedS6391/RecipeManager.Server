@@ -25,6 +25,15 @@ namespace RecipeManager.Core.Data.Configuration
                 .Property(j => j.Status)
                 .HasColumnName("recipeImportJob_status")
                 .HasConversion<string>();
+
+            builder
+                .Property(j => j.ImportedRecipeId)
+                .HasColumnName("recipeImportJob_recipeId");
+
+            builder
+                .HasOne(j => j.ImportedRecipe)
+                .WithOne()
+                .HasForeignKey<RecipeImportJob>(j => j.ImportedRecipeId);
         }
     }
 }

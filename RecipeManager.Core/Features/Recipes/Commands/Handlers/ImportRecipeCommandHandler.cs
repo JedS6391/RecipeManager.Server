@@ -48,7 +48,9 @@ namespace RecipeManager.Core.Features.Recipes.Commands.Handlers
             var job = new RecipeImportJob()
             {
                 UserId = request.User.Id,
-                Status = RecipeImportJobStatus.Created
+                Status = RecipeImportJobStatus.Created,
+                // The recipe ID will be set when the job gets processed.
+                ImportedRecipeId = null
             };
 
             await RecipeDomainContext.RecipeImportJobs.AddAsync(job);

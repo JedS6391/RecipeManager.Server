@@ -71,6 +71,8 @@ namespace RecipeManager.Core.Features.Recipes.Services
                     await _recipeDomainContext.Recipes.AddAsync(recipe);
 
                     await _recipeDomainContext.SaveChangesAsync();
+
+                    await AssociateRecipeToJob(recipe, importRecipeMessage.JobId);
                     
                     await UpdateJobStatus(importRecipeMessage.JobId, RecipeImportJobStatus.Completed);
                 }
@@ -90,6 +92,15 @@ namespace RecipeManager.Core.Features.Recipes.Services
             var job = await _recipeDomainContext.RecipeImportJobs.FirstAsync(j => j.Id == jobId);
 
             job.Status = newStatus;
+
+            await _recipeDomainContext.SaveChangesAsync();
+        }
+
+        private async Task AssociateRecipeToJob(Recipe recipe, Guid jobId)
+        {
+            var job = await _recipeDomainContext.RecipeImportJobs.FirstAsync(j => j.Id == jobId);
+
+            job.ImportedRecipeId = recipe.Id;
 
             await _recipeDomainContext.SaveChangesAsync();
         }

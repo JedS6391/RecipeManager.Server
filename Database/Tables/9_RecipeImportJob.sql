@@ -5,8 +5,9 @@ IF (NOT EXISTS (SELECT 1
 BEGIN
     CREATE TABLE dbo.tblRecipeImportJob
     (
-        recipeImportJob_id UNIQUEIDENTIFIER PRIMARY KEY default NEWID(),
-        recipeImportJob_userId NVARCHAR(250),
-        recipeImportJob_status NVARCHAR(100),
+        recipeImportJob_id          UNIQUEIDENTIFIER PRIMARY KEY default NEWID(),
+        recipeImportJob_userId      NVARCHAR(250),
+        recipeImportJob_status      NVARCHAR(100),
+        recipeImportJob_recipeId    UNIQUEIDENTIFIER NULL
     )
 END

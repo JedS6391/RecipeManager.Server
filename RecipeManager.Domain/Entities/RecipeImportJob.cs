@@ -23,5 +23,15 @@ namespace RecipeManager.Domain.Entities
         /// Gets the status of the import job.
         /// </summary>
         public RecipeImportJobStatus Status { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the identifier of the recipe that was import as a result of the job.
+        /// </summary>
+        public Guid? ImportedRecipeId { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the recipe that was imported as a result of the job.
+        /// </summary>
+        public Recipe ImportedRecipe { get; set; }
     }
 }
