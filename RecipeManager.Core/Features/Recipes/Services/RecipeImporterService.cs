@@ -11,6 +11,7 @@ using RecipeIngredientParser.Core.Parser;
 using RecipeIngredientParser.Core.Parser.Extensions;
 using RecipeManager.Core.Data.Abstract;
 using RecipeManager.Core.Features.Recipes.Services.Abstract;
+using RecipeManager.Core.Features.Recipes.Services.Exceptions;
 using RecipeManager.Core.Queue.Contracts;
 using RecipeManager.Domain.Entities;
 using RecipeManager.Domain.Entities.Enum;
@@ -42,20 +43,21 @@ namespace RecipeManager.Core.Features.Recipes.Services
         {
             try
             {
-                _logger.LogDebug($"Attempting to import recipe from {importRecipeMessage.RecipeUrl} for {importRecipeMessage.UserId}");
+                _logger.LogDebug(
+                    $"Attempting to import recipe from {importRecipeMessage.RecipeUrl} for {importRecipeMessage.UserId}");
 
                 await UpdateJobStatus(importRecipeMessage.JobId, RecipeImportJobStatus.Started);
-                
+
                 var rawPageContent = await HttpClient.GetStringAsync(importRecipeMessage.RecipeUrl);
 
                 _logger.LogTrace($"Successfully fetched content from {importRecipeMessage.RecipeUrl}");
-                
+
                 if (TryExtractRecipeData(rawPageContent, out var recipeData))
                 {
-                    _logger.LogTrace($"Successfully extracted recipe from {importRecipeMessage.RecipeUrl}");
+                    _logger.LogDebug($"Successfully extracted recipe from {importRecipeMessage.RecipeUrl}");
 
                     var defaultIngredientCategory = await GetDefaultIngredientCategory(importRecipeMessage.UserId);
-                    
+
                     var recipe = new Recipe()
                     {
                         Name = recipeData.Name,
@@ -73,16 +75,24 @@ namespace RecipeManager.Core.Features.Recipes.Services
                     await _recipeDomainContext.SaveChangesAsync();
 
                     await AssociateRecipeToJob(recipe, importRecipeMessage.JobId);
-                    
+
                     await UpdateJobStatus(importRecipeMessage.JobId, RecipeImportJobStatus.Completed);
                 }
+            }
+            catch (RecipeImportFailedException importFailedException)
+            {
+                _logger.LogError(importFailedException, "Recipe import failed.");
+                
+                await UpdateJobStatus(importRecipeMessage.JobId, RecipeImportJobStatus.Failed);
+
+                throw;
             }
             catch (Exception exception)
             {
                 _logger.LogError(exception, "Unhandled exception during recipe import processing.");
 
                 await UpdateJobStatus(importRecipeMessage.JobId, RecipeImportJobStatus.Failed);
-                
+
                 throw;
             }
         }
@@ -117,17 +127,25 @@ namespace RecipeManager.Core.Features.Recipes.Services
                 .DocumentNode
                 .SelectSingleNode("//script[@type='application/ld+json']");
 
+            if (jsonLdScriptNode == null)
+            {
+                _logger.LogTrace("No script tag with type='application/ld+json' was found.");
+
+                recipe = null;
+                
+                return false;
+            }
+
             var jsonLd = jsonLdScriptNode.InnerText;
             var json = JObject.Parse(jsonLd);
 
             if (json.TryGetValue("@graph", out var graphToken))
             {
-                var graphArray = graphToken as JArray;
+                _logger.LogTrace("Found @graph property in JSON-LD content - attempting recipe data extraction.");
 
-                if (graphArray == null)
+                if (!(graphToken is JArray graphArray))
                 {
-                    // TODO
-                    throw new Exception();
+                    throw new RecipeImportFailedException("@graph property from JSON-LD content was not an array type.");
                 }
 
                 var graphObjects = graphArray.Children<JObject>();
@@ -136,9 +154,10 @@ namespace RecipeManager.Core.Features.Recipes.Services
 
                 if (recipeData == null)
                 {
-                    // TODO
-                    throw new Exception();
+                    throw new RecipeImportFailedException("Could not find object with @type = 'Recipe' in @graph object collection.");
                 }
+                
+                _logger.LogTrace("Found recipe object type - extracting recipe data.");
                 
                 var recipeName = recipeData["name"];
                 var recipeIngredients = recipeData["recipeIngredient"];
@@ -152,6 +171,8 @@ namespace RecipeManager.Core.Features.Recipes.Services
                 return true;
             }
 
+            _logger.LogTrace("Did not find @graph property in JSON-LD content - unable to perform recipe data extraction.");
+            
             recipe = null;
             
             return false;
