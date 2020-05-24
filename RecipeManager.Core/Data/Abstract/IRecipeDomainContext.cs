@@ -43,6 +43,11 @@ namespace RecipeManager.Core.Data.Abstract
         /// Gets or sets the <see cref="CartItems"/> entities.
         /// </summary>
         DbSet<CartItem> CartItems { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the <see cref="RecipeImportJob"/> entities.
+        /// </summary>
+        DbSet<RecipeImportJob> RecipeImportJobs { get; set; }
 
         /// <summary>
         /// Saves all changes made in this context.

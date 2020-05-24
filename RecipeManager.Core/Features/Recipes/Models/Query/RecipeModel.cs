@@ -42,13 +42,18 @@ namespace RecipeManager.Core.Features.Recipes.Models.Query
         /// <returns>A read-only view of the given recipe.</returns>
         public static RecipeModel From(Recipe recipe)
         {
+            if (recipe == null)
+            {
+                return null;
+            }
+            
             return new RecipeModel()
             {
                 Id = recipe.Id,
                 Name = recipe.Name,
                 Ingredients = recipe.Ingredients?.Select(IngredientModel.From).ToList(),
                 Instructions = recipe.Instructions?.Select(InstructionModel.From).ToList(),
-                Groups = recipe.RecipeGroups.Select(RecipeGroupModel.From).ToList()
+                Groups = recipe.RecipeGroups?.Select(RecipeGroupModel.From).ToList()
             };
         }
     }
