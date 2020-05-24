@@ -28,15 +28,16 @@ namespace RecipeManager.Core.Features.Recipes.Services
 
         private readonly ILogger<RecipeImporterService> _logger;
         private readonly IRecipeDomainContext _recipeDomainContext;
-        private readonly Lazy<IngredientParser> _ingredientParser;
+        private readonly IngredientParser _ingredientParser;
         
         public RecipeImporterService(
             ILogger<RecipeImporterService> logger,
-            IRecipeDomainContext recipeDomainContext)
+            IRecipeDomainContext recipeDomainContext,
+            IngredientParser ingredientParser)
         {
             _logger = logger;
             _recipeDomainContext = recipeDomainContext;
-            _ingredientParser = new Lazy<IngredientParser>(GetIngredientParser);
+            _ingredientParser = ingredientParser;
         }
         
         public async Task ImportRecipe(ImportRecipeMessage importRecipeMessage)
@@ -180,7 +181,7 @@ namespace RecipeManager.Core.Features.Recipes.Services
 
         private Ingredient DetermineIngredient(string ingredient, IngredientCategory category)
         {
-            if (_ingredientParser.Value.TryParseIngredient(ingredient, out var parseResult))
+            if (_ingredientParser.TryParseIngredient(ingredient, out var parseResult))
             {
                 return new Ingredient()
                 {
@@ -218,15 +219,6 @@ namespace RecipeManager.Core.Features.Recipes.Services
             }
 
             return defaultIngredientCategory;
-        }
-
-        private IngredientParser GetIngredientParser()
-        {
-            return IngredientParser
-                .Builder
-                .New
-                .WithDefaultConfiguration()
-                .Build();
         }
 
         private class ExtractedRecipeData

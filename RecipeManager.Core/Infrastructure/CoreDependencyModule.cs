@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using RecipeIngredientParser.Core.Parser;
+using RecipeIngredientParser.Core.Parser.Extensions;
 using RecipeManager.Core.Data;
 using RecipeManager.Core.Data.Abstract;
 using RecipeManager.Core.Features.Recipes.Services;
@@ -19,6 +21,18 @@ namespace RecipeManager.Core.Infrastructure
                 .RegisterType<RecipeDomainContext>()
                 .As<IRecipeDomainContext>();
 
+            builder
+                .Register(_ =>
+                {
+                    var parserBuilder = IngredientParser
+                        .Builder
+                        .New
+                        .WithDefaultConfiguration();
+
+                    return parserBuilder.Build();
+                })
+                .SingleInstance();
+            
             builder
                 .RegisterType<RecipeImporterService>()
                 .As<IRecipeImporterService>();
