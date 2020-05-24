@@ -7,11 +7,10 @@ using HtmlAgilityPack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
-using RecipeIngredientParser.Core.Parser;
-using RecipeIngredientParser.Core.Parser.Extensions;
 using RecipeManager.Core.Data.Abstract;
 using RecipeManager.Core.Features.Recipes.Services.Abstract;
 using RecipeManager.Core.Features.Recipes.Services.Exceptions;
+using RecipeManager.Core.Features.Recipes.Services.Extensions;
 using RecipeManager.Core.Queue.Contracts;
 using RecipeManager.Domain.Entities;
 using RecipeManager.Domain.Entities.Enum;
@@ -28,16 +27,16 @@ namespace RecipeManager.Core.Features.Recipes.Services
 
         private readonly ILogger<RecipeImporterService> _logger;
         private readonly IRecipeDomainContext _recipeDomainContext;
-        private readonly IngredientParser _ingredientParser;
+        private readonly IRecipeIngredientParserFactory _ingredientParserFactory;
         
         public RecipeImporterService(
             ILogger<RecipeImporterService> logger,
             IRecipeDomainContext recipeDomainContext,
-            IngredientParser ingredientParser)
+            IRecipeIngredientParserFactory ingredientParserFactory)
         {
             _logger = logger;
             _recipeDomainContext = recipeDomainContext;
-            _ingredientParser = ingredientParser;
+            _ingredientParserFactory = ingredientParserFactory;
         }
         
         public async Task ImportRecipe(ImportRecipeMessage importRecipeMessage)
@@ -181,11 +180,13 @@ namespace RecipeManager.Core.Features.Recipes.Services
 
         private Ingredient DetermineIngredient(string ingredient, IngredientCategory category)
         {
-            if (_ingredientParser.TryParseIngredient(ingredient, out var parseResult))
+            var ingredientParser = _ingredientParserFactory.GetParser();
+            
+            if (ingredientParser.TryParseIngredient(ingredient, out var parseResult))
             {
                 return new Ingredient()
                 {
-                    Name = parseResult.Details.Ingredient ?? string.Empty,
+                    Name = (parseResult.Details.Ingredient.FirstCharToUpper()) ?? string.Empty,
                     CategoryId = category.Id,
                     Amount = $"{parseResult.Details.Amount ?? string.Empty} {parseResult.Details.Unit ?? string.Empty}"
                 };

@@ -22,15 +22,8 @@ namespace RecipeManager.Core.Infrastructure
                 .As<IRecipeDomainContext>();
 
             builder
-                .Register(_ =>
-                {
-                    var parserBuilder = IngredientParser
-                        .Builder
-                        .New
-                        .WithDefaultConfiguration();
-
-                    return parserBuilder.Build();
-                })
+                .RegisterType<RecipeIngredientParserFactory>()
+                .As<IRecipeIngredientParserFactory>()
                 .SingleInstance();
             
             builder
