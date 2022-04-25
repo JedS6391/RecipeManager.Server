@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using RecipeManager.Core.Configuration;
 using RecipeManager.Core.Data.Abstract;
-using RecipeManager.WebApi.Infrastucture;
+using RecipeManager.WebApi.Infrastructure;
 
 namespace RecipeManager.Host
 {

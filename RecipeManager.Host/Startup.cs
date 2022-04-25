@@ -1,14 +1,13 @@
+using System.Reflection;
+using Autofac;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Mvc.ApplicationParts;
-using System.Reflection;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using RecipeManager.WebApi.Infrastucture.ExceptionHandling;
+using RecipeManager.WebApi.Infrastructure.ExceptionHandling;
 
 namespace RecipeManager.Host
 {
@@ -20,9 +19,7 @@ namespace RecipeManager.Host
         }
 
         public IConfiguration Configuration { get; private set; }
-
-        public ILifetimeScope AutofacContainer { get; private set; }
-
+        
         public void ConfigureServices(IServiceCollection services)
         {
             var webApiAssembly = Assembly.Load("RecipeManager.WebApi");
@@ -34,6 +31,8 @@ namespace RecipeManager.Host
             });
             
             builder.PartManager.ApplicationParts.Add(new AssemblyPart(webApiAssembly));
+
+            builder.AddControllersAsServices();
 
             services.AddAuthentication(options =>
             {
@@ -60,26 +59,20 @@ namespace RecipeManager.Host
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseAuthentication();
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseCors(builder =>
-                builder
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowAnyOrigin());
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-
-            AutofacContainer = app.ApplicationServices.GetAutofacRoot();
+            app
+                .UseAuthentication()
+                .UseHttpsRedirection()
+                .UseRouting()
+                .UseAuthorization()
+                .UseCors(builder =>
+                    builder
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowAnyOrigin())
+                .UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                });
         }
     }
 }

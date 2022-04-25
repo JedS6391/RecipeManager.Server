@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using RecipeManager.Core.Exceptions;
 
-namespace RecipeManager.WebApi.Infrastucture.ExceptionHandling
+namespace RecipeManager.WebApi.Infrastructure.ExceptionHandling
 {
     public class NotFoundExceptionFilter : IActionFilter
     {

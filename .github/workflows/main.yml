@@ -1,9 +1,9 @@
-name: Build and deploy ASP.Net Core app to Azure Web App - recipe-manager-api
+name: Release
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - '*.*.*'
 
 jobs:
   build-and-deploy:
@@ -12,16 +12,16 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
-    - name: Set up .NET Core
+    - name: Set up .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '3.1.102'
+        dotnet-version: '6.0.x'
 
-    - name: Build with dotnet
+    - name: Build
       run: dotnet build --configuration Release
 
     - name: dotnet publish
-      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/recipe-manager-api
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v1
@@ -29,4 +29,4 @@ jobs:
         app-name: 'recipe-manager-api'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_cbff4487b1d9463fb074ca6bc62c8d91 }}
-        package: ${{env.DOTNET_ROOT}}/myapp 
+        package: ${{env.DOTNET_ROOT}}/recipe-manager-api 
