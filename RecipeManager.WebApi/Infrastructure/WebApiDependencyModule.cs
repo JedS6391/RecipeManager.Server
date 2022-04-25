@@ -1,11 +1,10 @@
 ﻿using Autofac;
-using Autofac.Integration.WebApi;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using RecipeManager.Core.Infrastructure;
 using RecipeManager.WebApi.Security;
 
-namespace RecipeManager.WebApi.Infrastucture
+namespace RecipeManager.WebApi.Infrastructure
 {
     public class WebApiDependencyModule : Module
     {
@@ -14,9 +13,7 @@ namespace RecipeManager.WebApi.Infrastucture
             base.Load(builder);
 
             builder.RegisterModule<CoreDependencyModule>();
-
-            builder.RegisterApiControllers(System.Reflection.Assembly.GetExecutingAssembly());
-
+            
             builder
                 .RegisterType<Mediator>()
                 .As<IMediator>()
