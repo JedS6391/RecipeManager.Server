@@ -49,5 +49,7 @@ namespace RecipeManager.Core.Data.Abstract
         /// </summary>
         /// <returns></returns>
         Task<int> SaveChangesAsync();
+
+        bool IsHealthy();
     }
 }

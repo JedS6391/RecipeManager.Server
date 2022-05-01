@@ -62,5 +62,7 @@ namespace RecipeManager.Core.Data
         {
             return await base.SaveChangesAsync();
         }
+
+        public bool IsHealthy() => Database.CanConnect();
     }
 }

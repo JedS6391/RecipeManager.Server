@@ -12,10 +12,9 @@ namespace RecipeManager.Host
         private readonly Lazy<string> _connectionString;
 
         public AppSettingsConnectionStringProvider(IConfiguration configuration)
-        {
+        {            
             _connectionString = new Lazy<string>(() =>
                 configuration.GetValue<string>("Database:ConnectionString"));
-                
         }
 
         public string ConnectionString => _connectionString.Value;
