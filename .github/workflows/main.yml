@@ -5,6 +5,10 @@ on:
     tags:
       - '*.*.*'
 
+env:
+  AZURE_WEBAPP_NAME: recipe-manager-api
+  AZURE_WEBAPP_PACKAGE_PATH: '.'
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -21,12 +25,11 @@ jobs:
       run: dotnet build --configuration Release
 
     - name: dotnet publish
-      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/recipe-manager-api
+      run: dotnet publish -c Release -o ${{env.AZURE_WEBAPP_PACKAGE_PATH}}/recipe-manager-api --no-restore
 
     - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v1
+      uses: azure/webapps-deploy@v2
       with:
-        app-name: 'recipe-manager-api'
-        slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_cbff4487b1d9463fb074ca6bc62c8d91 }}
-        package: ${{env.DOTNET_ROOT}}/recipe-manager-api 
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}/recipe-manager-api 
