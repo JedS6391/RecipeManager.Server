@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeManager.Host", "RecipeManager.Host\RecipeManager.Host.csproj", "{B2060079-CE88-4A32-AEFD-3818EEFAC36A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeManager.Host", "src\RecipeManager.Host\RecipeManager.Host.csproj", "{B2060079-CE88-4A32-AEFD-3818EEFAC36A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeManager.WebApi", "RecipeManager.WebApi\RecipeManager.WebApi.csproj", "{94DE2C3B-177D-4F7F-891A-B8C488046C25}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeManager.WebApi", "src\RecipeManager.WebApi\RecipeManager.WebApi.csproj", "{94DE2C3B-177D-4F7F-891A-B8C488046C25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeManager.Domain", "RecipeManager.Domain\RecipeManager.Domain.csproj", "{ABEC1C47-7589-499A-8205-32F6393FD1C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeManager.Domain", "src\RecipeManager.Domain\RecipeManager.Domain.csproj", "{ABEC1C47-7589-499A-8205-32F6393FD1C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeManager.Core", "RecipeManager.Core\RecipeManager.Core.csproj", "{2B953FB9-08A3-4B6B-B5AB-105F5367F5CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeManager.Core", "src\RecipeManager.Core\RecipeManager.Core.csproj", "{2B953FB9-08A3-4B6B-B5AB-105F5367F5CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
