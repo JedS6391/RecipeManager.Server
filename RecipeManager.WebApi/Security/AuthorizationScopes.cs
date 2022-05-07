@@ -1,7 +1,7 @@
 ﻿namespace RecipeManager.WebApi.Security
 {
     /// <summary>
-    /// Defines the various authorization scopes for the resources.
+    /// Defines the various authorization scopes for available API resources.
     /// </summary>
     public static class AuthorizationScopes
     {

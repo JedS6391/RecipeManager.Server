@@ -1,16 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
 
 namespace RecipeManager.WebApi.Security
 {
     /// <summary>
-    /// Defines the permissions required to access a particular scope.
+    /// Defines the scopes required to access a particular API resource.
     /// </summary>
-    public class AuthorizationScopeAttribute : TypeFilterAttribute
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
+    public class AuthorizationScopeAttribute : Attribute
     {
+        public string[] Scopes { get; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AuthorizationScopeAttribute" class.
+        /// </summary>
+        /// <param name="scopes">The scopes required.</param>
         public AuthorizationScopeAttribute(params string[] scopes)
-            : base(typeof(AuthorizationScopeFilter))
         {
-            Arguments = new object[] { scopes };
+            Scopes = scopes;
         }
     }
 }
