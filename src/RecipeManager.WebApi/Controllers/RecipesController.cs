@@ -14,7 +14,7 @@ using RecipeManager.WebApi.Security;
 namespace RecipeManager.WebApi.Controllers
 { 
     [ApiController]
-    [Authorize]
+    [Authorize(Policy = AuthorizationScopeRequirement.PolicyName)]
     [Route("api/me/recipes")]
     public class RecipesController : ControllerBase
     {

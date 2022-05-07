@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RecipeManager.WebApi.Infrastructure.ExceptionHandling;
+using RecipeManager.WebApi.Security;
 
 namespace RecipeManager.Host
 {
@@ -33,6 +34,13 @@ namespace RecipeManager.Host
             builder.PartManager.ApplicationParts.Add(new AssemblyPart(webApiAssembly));
 
             builder.AddControllersAsServices();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(
+                    AuthorizationScopeRequirement.PolicyName,
+                    policy => policy.Requirements.Add(new AuthorizationScopeRequirement()));
+            });
 
             services.AddAuthentication(options =>
             {

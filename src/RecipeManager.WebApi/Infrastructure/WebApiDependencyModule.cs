@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using RecipeManager.Core.Infrastructure;
 using RecipeManager.WebApi.Security;
@@ -32,6 +33,11 @@ namespace RecipeManager.WebApi.Infrastructure
             builder
                 .RegisterType<HttpContextIdentityProvider>()
                 .As<IIdentityProvider>();
+
+            builder
+                .RegisterType<AuthorizationScopeAuthorizationHandler>()
+                .As<IAuthorizationHandler>()
+                .SingleInstance();
         }
     }
 }
